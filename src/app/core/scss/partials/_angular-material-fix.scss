@@ -59,3 +59,12 @@ mat-sidenav-container {
     width: 14px;
     height: 7px;
 }
+
+datatable-header-cell {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
