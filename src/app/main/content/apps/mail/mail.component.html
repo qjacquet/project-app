@@ -50,14 +50,12 @@
                             <mat-icon>arrow_drop_down</mat-icon>
                         </button>
                         <mat-menu #selectMenu="matMenu">
-                            <button mat-menu-item (click)="selectMails()">All</button>
-                            <button mat-menu-item (click)="deselectMails()">None</button>
-                            <button mat-menu-item (click)="selectMails('read', true)">Read</button>
-                            <button mat-menu-item (click)="selectMails('read', false)">Unread</button>
-                            <button mat-menu-item (click)="selectMails('starred', true)">Starred</button>
-                            <button mat-menu-item (click)="selectMails('starred', false)">Unstarred</button>
-                            <button mat-menu-item (click)="selectMails('important', true)">Important</button>
-                            <button mat-menu-item (click)="selectMails('important', false)">Unimportant</button>
+                            <button mat-menu-item (click)="selectMails()">{{ 'MAIL.MESSAGES.ALL' | translate }}</button>
+                            <button mat-menu-item (click)="deselectMails()">{{ 'MAIL.MESSAGES.NONE' | translate }}</button>
+                            <button mat-menu-item (click)="selectMails('read', false)">{{ 'MAIL.MESSAGES.UNREAD' | translate }}</button>
+                            <button mat-menu-item (click)="selectMails('read', true)">{{ 'MAIL.MESSAGES.READ' | translate }}</button>
+                            <button mat-menu-item (click)="selectMails('starred', true)">{{ 'MAIL.MESSAGES.STARRED' | translate }}</button>
+                            <button mat-menu-item (click)="selectMails('important', true)">{{ 'MAIL.MESSAGES.IMPORTANT' | translate }}</button>
                         </mat-menu>
 
                         <div class="toolbar-separator" *ngIf="hasSelectedMails"></div>
@@ -71,7 +69,7 @@
                         </button>
                         <mat-menu #folderMenu="matMenu">
                             <button mat-menu-item *ngFor="let folder of folders"
-                                    (click)="setFolderOnSelectedMails(folder.id)">{{folder.title}}
+                                    (click)="setFolderOnSelectedMails(folder.id)">{{folder.title | translate}}
                             </button>
                         </mat-menu>
 

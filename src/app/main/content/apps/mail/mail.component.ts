@@ -5,7 +5,7 @@ import { FormControl } from '@angular/forms';
 import { Mail } from './mail.model';
 import { TranslationLoaderService } from '../../../../core/services/translation-loader.service';
 import { locale as english } from './i18n/en';
-import { locale as turkish } from './i18n/tr';
+import { locale as french } from './i18n/fr';
 
 @Component({
     selector   : 'mail',
@@ -34,7 +34,7 @@ export class MailComponent implements OnInit, OnDestroy
     )
     {
         this.searchInput = new FormControl('');
-        this.translationLoader.loadTranslations(english, turkish);
+        this.translationLoader.loadTranslations(english, french);
     }
 
     ngOnInit()
