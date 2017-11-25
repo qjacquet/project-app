@@ -128,7 +128,7 @@ export class ScrumboardService implements Resolve<any>
     updateBoard()
     {
         return new Promise((resolve, reject) => {
-            this.http.post('http://127.0.0.1:3000/scrumboards/' + this.board.id, this.board)
+            this.http.post('http://127.0.0.1:3000/scrumboards/' + this.board._id, this.board)
                 .subscribe(response => {
                     this.onBoardChanged.next(this.board);
                     resolve(this.board);
