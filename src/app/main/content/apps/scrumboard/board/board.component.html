@@ -25,7 +25,7 @@
                      fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="center center"
                      fxFlex="1 0 100%" fxFlex.gt-xs="1 0 auto"
                      fxFlexOrder="1" fxFlexOrder.gt-xs="2">
-                    <mat-icon *ngIf="board.settings.subscribed" class="board-subscribe s-16">remove_red_eye</mat-icon>
+                    <mat-icon class="board-subscribe s-16">remove_red_eye</mat-icon>
                     <scrumboard-edit-board-name
                         [board]="board"
                         (onNameChanged)="onBoardNameChanged($event)">

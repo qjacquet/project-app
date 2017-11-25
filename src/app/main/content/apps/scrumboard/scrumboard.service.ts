@@ -43,7 +43,7 @@ export class ScrumboardService implements Resolve<any>
     getBoards(): Promise<any>
     {
         return new Promise((resolve, reject) => {
-            this.http.get('api/scrumboard-boards')
+            this.http.get('http://127.0.0.1:3000/scrumboards/')
                 .subscribe((response: any) => {
                     this.boards = response;
                     this.onBoardsChanged.next(this.boards);
@@ -55,7 +55,7 @@ export class ScrumboardService implements Resolve<any>
     getBoard(boardId): Promise<any>
     {
         return new Promise((resolve, reject) => {
-            this.http.get('api/scrumboard-boards/' + boardId)
+            this.http.get('http://127.0.0.1:3000/scrumboards/' + boardId)
                 .subscribe((response: any) => {
                     this.board = response;
                     this.onBoardChanged.next(this.board);
@@ -128,7 +128,7 @@ export class ScrumboardService implements Resolve<any>
     updateBoard()
     {
         return new Promise((resolve, reject) => {
-            this.http.post('api/scrumboard-boards/' + this.board.id, this.board)
+            this.http.post('http://127.0.0.1:3000/scrumboards/' + this.board.id, this.board)
                 .subscribe(response => {
                     this.onBoardChanged.next(this.board);
                     resolve(this.board);
@@ -151,8 +151,9 @@ export class ScrumboardService implements Resolve<any>
     createNewBoard(board)
     {
         return new Promise((resolve, reject) => {
-            this.http.post('api/scrumboard-boards/' + board.id, board)
+            this.http.post('http://127.0.0.1:3000/scrumboards/', board)
                 .subscribe(response => {
+                    console.log(response);
                     resolve(board);
                 }, reject);
         });

@@ -47,7 +47,7 @@ export class Board
 {
     name: string;
     uri: string;
-    id: string;
+    _id: string;
     settings: {
         color: string,
         subscribed: boolean,
@@ -70,7 +70,7 @@ export class Board
     {
         this.name = board.name || 'Untitled Board';
         this.uri = board.uri || 'untitled-board';
-        this.id = board.id || Utils.generateGUID();
+        this._id = board._id || Utils.generateGUID();
         this.settings = board.settings || {
             color          : '',
             subscribed     : true,

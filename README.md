@@ -2,7 +2,7 @@
 
 Admin Dashboard with Material Design and angular
 
-#install
+# install
 
 - npm install
 - ng serve 

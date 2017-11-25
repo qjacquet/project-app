@@ -11,7 +11,7 @@
 
         <!-- BOARD -->
         <div class="board-list-item" *ngFor="let board of boards"
-             [routerLink]="'/apps/scrumboard/boards/'+board.id+'/'+board.uri"
+             [routerLink]="'/apps/scrumboard/boards/'+board.id"
              fxLayout="column" fxLayoutAlign="center center"
              [@animate]="{value:'*',params:{y:'100%'}}">
             <mat-icon class="s-64">assessment</mat-icon>

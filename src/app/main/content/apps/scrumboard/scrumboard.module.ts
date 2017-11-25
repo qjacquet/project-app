@@ -24,7 +24,7 @@ const routes: Routes = [
         }
     },
     {
-        path     : 'boards/:boardId/:boardUri',
+        path     : 'boards/:boardId',
         component: ScrumboardBoardComponent,
         resolve  : {
             board: BoardResolve
