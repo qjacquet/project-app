@@ -31,6 +31,13 @@ export class NavigationModel
                         'type' : 'item',
                         'icon' : 'assessment',
                         'url'  : '/apps/scrumboard'
+                    },
+                    {
+                        'id'   : 'file-manager',
+                        'title': 'File Manager',
+                        'type' : 'item',
+                        'icon' : 'folder',
+                        'url'  : '/apps/file-manager'
                     }
                 ]
             }

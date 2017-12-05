@@ -23,6 +23,10 @@ const appRoutes: Routes = [
         loadChildren: './main/content/apps/scrumboard/scrumboard.module#ScrumboardModule'
     },
     {
+        path        : 'apps/file-manager',
+        loadChildren: './main/content/apps/file-manager/file-manager.module#FileManagerModule'
+    },
+    {
         path      : '**',
         redirectTo: 'apps/dashboards/project'
     }
