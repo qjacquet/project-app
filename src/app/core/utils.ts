@@ -87,7 +87,7 @@ export class Utils
                        .substring(1);
         }
 
-        return S4() + S4();
+        return S4() + S4() + S4();
     }
 
     public static toggleInArray(item, array)

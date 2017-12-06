@@ -42,6 +42,10 @@ export class ScrumboardBoardSettingsSidenavComponent implements OnInit, OnDestro
         this.scrumboardService.updateBoard();
     }
 
+    deleteBoard(){
+        this.scrumboardService.deleteBoard();
+    }
+
     ngOnDestroy()
     {
         this.onBoardChanged.unsubscribe();
