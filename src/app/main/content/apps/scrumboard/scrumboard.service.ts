@@ -68,6 +68,18 @@ export class ScrumboardService implements Resolve<any>
         });
     }
 
+    getUsers(): Promise<any>
+    {
+        return new Promise((resolve, reject) => {
+            this.http.get('http://127.0.0.1:3000/users/')
+                .subscribe((response: any) => {
+                    console.log(response);
+                    this.board.members = response;
+                    resolve(this.board);
+                }, reject);
+        });
+    }
+
     addCard(listId, newCard)
     {
         this.board.lists.map((list) => {
@@ -134,8 +146,6 @@ export class ScrumboardService implements Resolve<any>
         return new Promise((resolve, reject) => {
             this.http.put('http://127.0.0.1:3000/scrumboards/' + this.board._id, this.board)
                 .subscribe(response => {
-                    console.log(this.board);
-                    console.log(response);
                     this.onBoardChanged.next(this.board);
                     resolve(this.board);
                 }, reject);

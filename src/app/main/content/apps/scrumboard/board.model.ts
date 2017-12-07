@@ -78,7 +78,7 @@ export class Board
         };
         this.lists = [];
         this.cards = [];
-        this.members = board.members || sampleMembers;
+        this.members = board.members;
         this.labels = board.labels || sampleLabels;
     }
 }

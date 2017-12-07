@@ -49,9 +49,9 @@
 
                     <mat-menu #membersMenu="matMenu" [overlapTrigger]="false">
                         <div fxFlex fxLayout="column" class="scrumboard-members-menu" (click)="$event.stopPropagation()">
-                            <mat-checkbox class="member px-12" [checked]="card.idMembers.indexOf(member.id) > -1"
+                            <mat-checkbox class="member px-12" [checked]="card.idMembers.indexOf(member._id) > -1"
                                           *ngFor="let member of board.members"
-                                          (change)="toggleInArray(member.id, card.idMembers);updateCard()">
+                                          (change)="toggleInArray(member._id, card.idMembers);updateCard()">
                                 <div fxLayout="row" fxLayoutAlign="start center">
                                     <img [alt]="member.name" [src]=" member.avatar" class="avatar"/>
                                     <p class="member-name">{{ member.name }}</p>
