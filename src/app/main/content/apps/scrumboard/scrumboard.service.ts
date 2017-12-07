@@ -134,6 +134,8 @@ export class ScrumboardService implements Resolve<any>
         return new Promise((resolve, reject) => {
             this.http.put('http://127.0.0.1:3000/scrumboards/' + this.board._id, this.board)
                 .subscribe(response => {
+                    console.log(this.board);
+                    console.log(response);
                     this.onBoardChanged.next(this.board);
                     resolve(this.board);
                 }, reject);
@@ -168,8 +170,8 @@ export class ScrumboardService implements Resolve<any>
         return new Promise((resolve, reject) => {
             this.http.post('http://127.0.0.1:3000/scrumboards/', board)
                 .subscribe(response => {
-                    console.log(response);
-                    resolve(board);
+                    board = response;
+                    this.router.navigate(['/apps/scrumboard/boards/' + board._id]);
                 }, reject);
         });
     }

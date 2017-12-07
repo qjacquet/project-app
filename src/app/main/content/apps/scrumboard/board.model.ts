@@ -70,7 +70,7 @@ export class Board
     {
         this.name = board.name || 'Untitled Board';
         this.uri = board.uri || 'untitled-board';
-        this._id = board._id || Utils.generateGUID();
+        this._id = board._id;
         this.settings = board.settings || {
             color          : '',
             subscribed     : true,
