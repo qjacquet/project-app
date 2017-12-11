@@ -31,11 +31,11 @@
             <form name="loginForm" [formGroup]="loginForm" novalidate>
 
                 <mat-form-field>
-                    <input matInput placeholder="Email" formControlName="email">
-                    <mat-error *ngIf="loginFormErrors.email.required">
+                    <input matInput placeholder="Email" formControlName="login">
+                    <mat-error *ngIf="loginFormErrors.login.required">
                         Email is required
                     </mat-error>
-                    <mat-error *ngIf="!loginFormErrors.email.required && loginFormErrors.email.email">
+                    <mat-error *ngIf="!loginFormErrors.login.required && loginFormErrors.login.login">
                         Please enter a valid email address
                     </mat-error>
                 </mat-form-field>
@@ -59,7 +59,7 @@
                 </div>
 
                 <button mat-raised-button color="accent" class="submit-button" aria-label="LOGIN"
-                        [disabled]="loginForm.invalid">
+                        (click)="submit()" [disabled]="loginForm.invalid">
                     LOGIN
                 </button>
 

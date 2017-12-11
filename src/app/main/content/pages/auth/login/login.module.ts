@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../../../../../core/modules/shared.module';
 import { RouterModule } from '@angular/router';
-
+import { AuthService } from '../auth.service';
 import { LoginComponent } from './login.component';
 
 const routes = [
@@ -18,6 +18,9 @@ const routes = [
     imports     : [
         SharedModule,
         RouterModule.forChild(routes)
+    ],
+    providers:[
+        AuthService
     ]
 })
 

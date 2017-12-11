@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { AuthService } from '../auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfigService } from '../../../../../core/services/config.service';
 import { Animations } from '../../../../../core/animations';
@@ -17,7 +17,8 @@ export class LoginComponent implements OnInit
 
     constructor(
         private Config: ConfigService,
-        private formBuilder: FormBuilder
+        private formBuilder: FormBuilder,
+        private authService: AuthService
     )
     {
         this.Config.setSettings({
@@ -29,7 +30,7 @@ export class LoginComponent implements OnInit
         });
 
         this.loginFormErrors = {
-            email   : {},
+            login   : {},
             password: {}
         };
     }
@@ -37,7 +38,7 @@ export class LoginComponent implements OnInit
     ngOnInit()
     {
         this.loginForm = this.formBuilder.group({
-            email   : ['', [Validators.required, Validators.email]],
+            login   : ['', [Validators.required, Validators.email]],
             password: ['', Validators.required]
         });
 
@@ -66,5 +67,9 @@ export class LoginComponent implements OnInit
                 this.loginFormErrors[field] = control.errors;
             }
         }
+    }
+
+    submit(){
+        this.authService.login(this.loginForm.value);
     }
 }
