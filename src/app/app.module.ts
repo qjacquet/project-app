@@ -16,11 +16,13 @@ import { ConfigService } from './core/services/config.service';
 import { NavigationService } from './core/components/navigation/navigation.service';
 import { MarkdownModule } from 'angular2-markdown';
 import { TranslateModule } from '@ngx-translate/core';
+import { AlwaysAuthGuard } from './core/services/auth-guard.service';
 
 const appRoutes: Routes = [
     {
         path        : 'apps/scrumboard',
-        loadChildren: './main/content/apps/scrumboard/scrumboard.module#ScrumboardModule'
+        loadChildren: './main/content/apps/scrumboard/scrumboard.module#ScrumboardModule',
+        canActivate: [AlwaysAuthGuard]
     },
     {
         path        : 'apps/file-manager',
@@ -58,7 +60,8 @@ const appRoutes: Routes = [
     providers   : [
         SplashScreenService,
         ConfigService,
-        NavigationService
+        NavigationService,
+        AlwaysAuthGuard
     ],
     bootstrap   : [
         AppComponent
