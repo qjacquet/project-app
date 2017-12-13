@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router, ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { Location } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
-import { HttpClient } from '@angular/common/http';
+import { HttpService } from '../../../../core/services/http.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
@@ -16,7 +16,7 @@ export class ScrumboardService implements Resolve<any>
     onBoardChanged: BehaviorSubject<any> = new BehaviorSubject([]);
 
     constructor(
-        private http: HttpClient,
+        private http: HttpService,
         private router: Router,
     )
     {

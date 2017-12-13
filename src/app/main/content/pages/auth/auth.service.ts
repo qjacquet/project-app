@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { Router, ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { Location } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class AuthService implements Resolve<any>
@@ -38,15 +39,8 @@ export class AuthService implements Resolve<any>
         });
     }
 
-    login(userForm)
+    signin(userForm) : Observable<any>
     {
-        console.log(userForm);
-        return new Promise((resolve, reject) => {
-            this.http.post('http://127.0.0.1:3000/auth/', userForm)
-                .subscribe(response => {
-                    this.router.navigate(['/']);
-                }, reject);
-        });
+        return this.http.post('http://127.0.0.1:3000/auth/', userForm);
     }
-
 }

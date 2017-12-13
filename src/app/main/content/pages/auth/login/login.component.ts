@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfigService } from '../../../../../core/services/config.service';
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit
     constructor(
         private Config: ConfigService,
         private formBuilder: FormBuilder,
-        private authService: AuthService
+        private authService: AuthService,
+        private router: Router
     )
     {
         this.Config.setSettings({
@@ -31,7 +33,8 @@ export class LoginComponent implements OnInit
 
         this.loginFormErrors = {
             login   : {},
-            password: {}
+            password: {},
+            global  : {}
         };
     }
 
@@ -69,7 +72,21 @@ export class LoginComponent implements OnInit
         }
     }
 
-    submit(){
-        this.authService.login(this.loginForm.value);
+    signin() 
+    {
+        this.authService.signin(this.loginForm.value)
+            .subscribe(
+                data => {
+                    if (data.success == false) {
+                        this.loginFormErrors.global = data.message;
+                    }
+                    if (data.success == true) {
+                        localStorage.setItem('token', data.token);
+                        this.router.navigateByUrl('/');
+                    }
+                },
+                error => {
+
+                });
     }
 }

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule } from '@angular/http';
+import { HttpModule, RequestOptions, XHRBackend } from '@angular/http';
+import { HttpService } from './core/services/http.service';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
@@ -63,6 +64,15 @@ const appRoutes: Routes = [
         ProjectModule
     ],
     providers   : [
+        /** HTTP Custom */
+        {
+            provide: HttpService,
+            useFactory: (backend: XHRBackend, options: RequestOptions) => {
+              return new HttpService(backend, options);
+            },
+            deps: [XHRBackend, RequestOptions]
+        },
+
         SplashScreenService,
         ConfigService,
         NavigationService,
