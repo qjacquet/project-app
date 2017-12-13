@@ -35,6 +35,7 @@ export class HttpService extends Http {
     return (res: Response) => {
       if (res.status === 401 || res.status === 403) {
         localStorage.removeItem('token');
+        localStorage.removeItem('currentUser');
       }
       return Observable.throw(res);
     };

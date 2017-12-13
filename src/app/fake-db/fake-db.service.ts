@@ -56,9 +56,3 @@ export class FakeDbService implements InMemoryDbService
         };
     }
 }
-
-export class UserService {
-  isLoggedIn(): boolean {
-    return false;
-  }
-}

@@ -3,6 +3,9 @@ import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { ConfigService } from '../../core/services/config.service';
 import { TranslateService } from '@ngx-translate/core';
 
+import { User } from '../../core/models/user';
+import { UserService } from '../../core/services/user.service';
+
 @Component({
     selector   : 'toolbar',
     templateUrl: './toolbar.component.html',
@@ -11,6 +14,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 export class ToolbarComponent
 {
+    currentUser: User;
     userStatusOptions: any[];
     languages: any;
     selectedLanguage: any;
@@ -20,7 +24,8 @@ export class ToolbarComponent
     constructor(
         private router: Router,
         private Config: ConfigService,
-        private translate: TranslateService
+        private translate: TranslateService,
+        private userService: UserService
     )
     {
         this.userStatusOptions = [
@@ -82,6 +87,8 @@ export class ToolbarComponent
             this.horizontalNav = settings.layout.navigation === 'top';
         });
 
+        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        console.log(this.currentUser);
     }
 
     search(value)

@@ -81,7 +81,9 @@ export class LoginComponent implements OnInit
                         this.loginFormErrors.global = data.message;
                     }
                     if (data.success == true) {
+                        console.log(data);
                         localStorage.setItem('token', data.token);
+                        localStorage.setItem('currentUser', JSON.stringify(data.currentUser));
                         this.router.navigateByUrl('/');
                     }
                 },
