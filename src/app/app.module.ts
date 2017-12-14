@@ -20,6 +20,7 @@ import { NavigationService } from './core/components/navigation/navigation.servi
 import { MarkdownModule } from 'angular2-markdown';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthGuard, OnlyLoggedInUsersGuard } from './core/services/auth-guard.service';
+import { AuthService } from './core/services/auth.service';
 import { JwtHelper } from 'angular2-jwt';
 
 const appRoutes: Routes = [
@@ -69,10 +70,10 @@ const appRoutes: Routes = [
         /** HTTP Custom */
         {
             provide: HttpService,
-            useFactory: (backend: XHRBackend, options: RequestOptions) => {
-              return new HttpService(backend, options);
+            useFactory: (backend: XHRBackend, options: RequestOptions, authService: AuthService) => {
+              return new HttpService(backend, options, authService);
             },
-            deps: [XHRBackend, RequestOptions]
+            deps: [XHRBackend, RequestOptions, AuthService]
         },
         SplashScreenService,
         ConfigService,

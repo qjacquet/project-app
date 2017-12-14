@@ -43,4 +43,12 @@ export class AuthService implements Resolve<any>
     {
         return this.http.post('http://127.0.0.1:3000/auth/', userForm);
     }
+
+    logout()
+    {
+        console.log('logged out');
+        localStorage.removeItem('token');
+        localStorage.removeItem('currentUser');
+        this.router.navigate(['/pages/auth/login']);
+    }
 }

@@ -3,18 +3,28 @@ import {Http, XHRBackend, RequestOptions, Request, RequestOptionsArgs, Response,
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class HttpService extends Http {
 
-  constructor (backend: XHRBackend, options: RequestOptions) {
+  private authService : AuthService;
+
+  constructor (
+    backend: XHRBackend, 
+    options: RequestOptions,
+    authService : AuthService
+  ) {
     let token = localStorage.getItem('token'); // your custom token getter function here
     options.headers.set('Authorization', token);
     super(backend, options);
+
+    this.authService = authService;
   }
 
   request(url: string|Request, options?: RequestOptionsArgs): Observable<Response> {
     let token = localStorage.getItem('token');
+
     if (typeof url === 'string') { // meaning we have to add the token to the options, not in url
       if (!options) {
         // let's make option object
@@ -34,8 +44,7 @@ export class HttpService extends Http {
     // we have to pass HttpService's own instance here as `self`
     return (res: Response) => {
       if (res.status === 401 || res.status === 403) {
-        localStorage.removeItem('token');
-        localStorage.removeItem('currentUser');
+        this.authService.logout();
       }
       return Observable.throw(res);
     };

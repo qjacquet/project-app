@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../../../../../core/modules/shared.module';
 import { RouterModule } from '@angular/router';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../../../../core/services/auth.service';
 import { LoginComponent } from './login.component';
 
 const routes = [
