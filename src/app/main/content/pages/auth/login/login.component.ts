@@ -87,7 +87,6 @@ export class LoginComponent implements OnInit
                         this.loginFormErrors.global = data.message;
                     }
                     if (data.success == true) {
-                        console.log(data);
                         localStorage.setItem('token', data.token);
                         localStorage.setItem('currentUser', JSON.stringify(this.jwtHelper.decodeToken(data.token)));
                         this.router.navigateByUrl(this.redirectUrl);

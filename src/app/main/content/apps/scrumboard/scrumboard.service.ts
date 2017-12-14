@@ -73,7 +73,6 @@ export class ScrumboardService implements Resolve<any>
         return new Promise((resolve, reject) => {
             this.http.get('http://127.0.0.1:3000/users/')
                 .subscribe((response: any) => {
-                    console.log(response);
                     this.board.members = response;
                     resolve(this.board);
                 }, reject);

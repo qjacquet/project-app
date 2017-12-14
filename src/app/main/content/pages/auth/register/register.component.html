@@ -1,0 +1,91 @@
+<div id="register" fxLayout="row" fxLayoutAlign="start">
+
+    <div id="register-intro" fxFlex fxHide fxShow.gt-xs>
+
+        <div class="logo" *IfOnDom [@animate]="{value:'*',params:{scale:'0.2'}}">
+            <img src="assets/images/logos/logo.svg">
+        </div>
+
+        <div class="title" *IfOnDom [@animate]="{value:'*',params:{delay:'50ms',y:'25px'}}">
+            Welcome to the !
+        </div>
+
+        <div class="description" *IfOnDom [@animate]="{value:'*',params:{delay:'100ms',y:'25px'}}">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ullamcorper nisl erat,
+            vel convallis elit fermentum pellentesque. Sed mollis velit facilisis facilisis viverra.
+        </div>
+
+    </div>
+
+    <div id="register-form-wrapper" PerfectScrollbar *IfOnDom [@animate]="{value:'*',params:{delay:'300ms',x:'100%'}}">
+
+        <div id="register-form">
+
+            <div class="logo" fxHide.gt-xs>
+                <span>F</span>
+            </div>
+
+            <div class="title">CREATE AN ACCOUNT</div>
+            <div class="description">Sed mollis velit facilisis facilisis viverra</div>
+
+            <form name="registerForm" [formGroup]="registerForm" novalidate>
+
+                <mat-form-field>
+                    <input matInput placeholder="First name" formControlName="firstName">
+                    <mat-error *ngIf="registerFormErrors.firstName.required">
+                        First name is required
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput placeholder="Last name" formControlName="lastName">
+                    <mat-error *ngIf="registerFormErrors.lastName.required">
+                        Last name is required
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput placeholder="Email" formControlName="login">
+                    <mat-error *ngIf="registerFormErrors.login.required">
+                        Email is required
+                    </mat-error>
+                    <mat-error *ngIf="!registerFormErrors.login.required && registerFormErrors.login.login">
+                        Please enter a valid email address
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput placeholder="Password" type="password" formControlName="password">
+                    <mat-error *ngIf="registerFormErrors.password.required">
+                        Password is required
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput placeholder="Password (Confirm)" type="password" formControlName="passwordConfirm">
+                    <mat-error *ngIf="registerFormErrors.passwordConfirm.required">
+                        Password confirmation is required
+                    </mat-error>
+                </mat-form-field>
+
+                <div class="terms" fxLayout="row" fxLayoutAlign="center center">
+                    <mat-checkbox name="terms" aria-label="Accept" required>
+                        <span>Accept</span>
+                    </mat-checkbox>
+                    <a href="#">terms and conditions</a>
+                </div>
+
+                <button mat-raised-button color="accent" class="submit-button" aria-label="CREATE AN ACCOUNT"
+                        (click)="signup()" [disabled]="registerForm.invalid">
+                    CREATE AN ACCOUNT
+                </button>
+
+            </form>
+
+            <div class="register" fxLayout="column" fxLayoutAlign="center center">
+                <span class="text">Already have an account?</span>
+                <a class="link" [routerLink]="'/login'">Login</a>
+            </div>
+        </div>
+    </div>
+</div>

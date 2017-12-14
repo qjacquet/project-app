@@ -14,7 +14,7 @@ export class UserService {
         return this.http.get('http://localhost:3000/users/' + id);
     }
 
-    create(user: User) {
+    create(user: any) {
         return this.http.post('http://localhost:3000/users', user);
     }
 
