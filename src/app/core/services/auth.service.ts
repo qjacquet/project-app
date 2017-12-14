@@ -46,7 +46,6 @@ export class AuthService implements Resolve<any>
 
     logout()
     {
-        console.log('logged out');
         localStorage.removeItem('token');
         localStorage.removeItem('currentUser');
         this.router.navigate(['/pages/auth/login']);
