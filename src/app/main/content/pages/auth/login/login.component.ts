@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../../../core/services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfigService } from '../../../../../core/services/config.service';
@@ -16,12 +16,14 @@ export class LoginComponent implements OnInit
 {
     loginForm: FormGroup;
     loginFormErrors: any;
+    redirectUrl: string;
 
     constructor(
         private Config: ConfigService,
         private formBuilder: FormBuilder,
         private authService: AuthService,
         private router: Router,
+        private route: ActivatedRoute,
         private jwtHelper: JwtHelper
     )
     {
@@ -38,6 +40,8 @@ export class LoginComponent implements OnInit
             password: {},
             global  : {}
         };
+
+        this.redirectUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
 
     ngOnInit()
@@ -86,7 +90,7 @@ export class LoginComponent implements OnInit
                         console.log(data);
                         localStorage.setItem('token', data.token);
                         localStorage.setItem('currentUser', JSON.stringify(this.jwtHelper.decodeToken(data.token)));
-                        this.router.navigateByUrl('/');
+                        this.router.navigateByUrl(this.redirectUrl);
                     }
                 },
                 error => {

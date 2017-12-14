@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { ConfigService } from '../../core/services/config.service';
 import { TranslateService } from '@ngx-translate/core';
+import { AuthService } from '../../core/services/auth.service';
 
 import { User } from '../../core/models/user';
 import { UserService } from '../../core/services/user.service';
@@ -25,7 +26,8 @@ export class ToolbarComponent
         private router: Router,
         private Config: ConfigService,
         private translate: TranslateService,
-        private userService: UserService
+        private userService: UserService,
+        private authService: AuthService
     )
     {
         this.userStatusOptions = [
@@ -103,5 +105,10 @@ export class ToolbarComponent
 
         // Use the selected language for translations
         this.translate.use(lang.id);
+    }
+
+    logout()
+    {
+        this.authService.logout();
     }
 }

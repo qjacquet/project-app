@@ -48,6 +48,6 @@ export class AuthService implements Resolve<any>
     {
         localStorage.removeItem('token');
         localStorage.removeItem('currentUser');
-        this.router.navigate(['/pages/auth/login']);
+        this.router.navigate(['login']);
     }
 }
