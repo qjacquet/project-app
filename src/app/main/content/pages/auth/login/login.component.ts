@@ -4,6 +4,7 @@ import { AuthService } from '../auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfigService } from '../../../../../core/services/config.service';
 import { Animations } from '../../../../../core/animations';
+import { JwtHelper } from 'angular2-jwt';
 
 @Component({
     selector   : 'login',
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit
         private Config: ConfigService,
         private formBuilder: FormBuilder,
         private authService: AuthService,
-        private router: Router
+        private router: Router,
+        private jwtHelper: JwtHelper
     )
     {
         this.Config.setSettings({
@@ -83,7 +85,7 @@ export class LoginComponent implements OnInit
                     if (data.success == true) {
                         console.log(data);
                         localStorage.setItem('token', data.token);
-                        localStorage.setItem('currentUser', JSON.stringify(data.currentUser));
+                        localStorage.setItem('currentUser', JSON.stringify(this.jwtHelper.decodeToken(data.token)));
                         this.router.navigateByUrl('/');
                     }
                 },

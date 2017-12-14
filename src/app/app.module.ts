@@ -20,6 +20,7 @@ import { NavigationService } from './core/components/navigation/navigation.servi
 import { MarkdownModule } from 'angular2-markdown';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthGuard, OnlyLoggedInUsersGuard } from './core/services/auth-guard.service';
+import { JwtHelper } from 'angular2-jwt';
 
 const appRoutes: Routes = [
     {
@@ -73,13 +74,13 @@ const appRoutes: Routes = [
             },
             deps: [XHRBackend, RequestOptions]
         },
-
         SplashScreenService,
         ConfigService,
         NavigationService,
         AuthGuard,
         OnlyLoggedInUsersGuard,
-        UserService
+        UserService,
+        JwtHelper
     ],
     bootstrap   : [
         AppComponent
