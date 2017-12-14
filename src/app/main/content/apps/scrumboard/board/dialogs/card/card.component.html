@@ -54,7 +54,7 @@
                                           (change)="toggleInArray(member._id, card.idMembers);updateCard()">
                                 <div fxLayout="row" fxLayoutAlign="start center">
                                     <img [alt]="member.name" [src]=" member.avatar" class="avatar"/>
-                                    <p class="member-name">{{ member.name }}</p>
+                                    <p class="member-name">{{ member.firstName }} {{ member.lastName }}</p>
                                 </div>
                             </mat-checkbox>
                         </div>
@@ -398,7 +398,7 @@
                               class="comment new-comment" fxLayout="column" fxLayoutAlign="start" no-validate>
 
                             <div fxLayout="row">
-                                <img class="comment-member-avatar" src="assets/images/avatars/profile.jpg">
+                                <img class="comment-member-avatar" [src]="currentUser.avatar">
                                 <mat-form-field fxFlex>
                                     <input matInput name="newComment" ngModel #newComment="ngModel"
                                            placeholder="Write a comment.." required>
@@ -421,10 +421,10 @@
 
                             <div fxLayout="column">
                                 <div class="comment-member-name">
-                                    {{board.members | getById: comment.idMember:'name'}}
+                                    {{board.members | getById: comment.idMember:'firstName'}} {{board.members | getById: comment.idMember:'lastName'}}
                                 </div>
                                 <div class="comment-bubble">{{comment.message}}</div>
-                                <div class="comment-time secondary-text">{{comment.time}}</div>
+                                <div class="comment-time secondary-text">{{comment.time | date: 'dd/MM/yyyy'}}</div>
                             </div>
                         </div>
                     </div>
@@ -448,7 +448,7 @@
                                  [src]="board.members| getById:activity.idMember:'avatar'">
                             <div class="activity-member-name">{{board.members| getById:activity.idMember:'name'}}</div>
                             <div class="activity-message">{{activity.message}}</div>
-                            <div class="activity-time secondary-text">{{activity.time}}</div>
+                            <div class="activity-time secondary-text">{{activity.time | date: 'dd/MM/yyyy'}}</div>
                         </div>
                     </div>
 

@@ -1,3 +1,5 @@
+import { User } from './models/user'
+
 export class Utils
 {
     public static filterArrayByString(mainArr, searchText)
@@ -110,5 +112,12 @@ export class Utils
                    .replace(/\-\-+/g, '-')         // Replace multiple - with single -
                    .replace(/^-+/, '')             // Trim - from start of text
                    .replace(/-+$/, '');            // Trim - from end of text
+    }
+
+    public static getCurrentUser()
+    {
+        var user = new User();
+        user = JSON.parse(localStorage.getItem('currentUser'));
+        return user;
     }
 }

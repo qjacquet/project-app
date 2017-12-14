@@ -57,7 +57,8 @@ export class Board
     cards: Card[];
     members: {
         id: string,
-        name: string,
+        firstName: string,
+        lastName: string,
         avatar: string
     }[];
     labels: {

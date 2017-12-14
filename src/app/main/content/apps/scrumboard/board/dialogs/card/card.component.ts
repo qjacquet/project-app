@@ -5,6 +5,7 @@ import { ScrumboardService } from '../../../scrumboard.service';
 import { NgForm } from '@angular/forms/src/forms';
 import { Utils } from '../../../../../../../core/utils';
 import { ConfirmDialogComponent } from '../../../../../../../core/components/confirm-dialog/confirm-dialog.component';
+import { User } from '../../../../../../../core/models/user';
 
 @Component({
     selector     : 'scrumboard-board-card-dialog',
@@ -17,6 +18,7 @@ export class ScrumboardCardDialogComponent implements OnInit, OnDestroy
     card: any;
     board: any;
     list: any;
+    currentUser: User;
 
     onBoardChanged: Subscription;
     toggleInArray = Utils.toggleInArray;
@@ -33,7 +35,7 @@ export class ScrumboardCardDialogComponent implements OnInit, OnDestroy
         private scrumboardService: ScrumboardService
     )
     {
-
+        this.currentUser = Utils.getCurrentUser();
     }
 
     ngOnInit()
@@ -230,9 +232,9 @@ export class ScrumboardCardDialogComponent implements OnInit, OnDestroy
         const newCommentText = form.value.newComment;
 
         const newComment = {
-            idMember: '36027j1930450d8bf7b10158',
+            idMember: this.currentUser.id,
             message : newCommentText,
-            time    : 'now'
+            time    : Date.now()
         };
 
         this.card.comments.unshift(newComment);

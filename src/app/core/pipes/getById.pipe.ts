@@ -14,6 +14,11 @@ export class GetByIdPipe implements PipeTransform
                 return item.id === id;
             }
 
+            if ( item._id !== undefined )
+            {
+                return item._id === id;
+            }
+
             return false;
         });
 
