@@ -107,6 +107,11 @@ export class ToolbarComponent
         this.translate.use(lang.id);
     }
 
+    profile()
+    {
+        this.router.navigate(['profile']);
+    }
+
     logout()
     {
         this.authService.logout(true);
