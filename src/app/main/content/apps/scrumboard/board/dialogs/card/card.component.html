@@ -62,10 +62,10 @@
                 </div>
                 <!-- / MEMBERS -->
 
-                <!-- ATTACHMENT -->
-                <button mat-icon-button aria-label="Attachment">
+                <!-- ATTACHMENT -->               
+                <!-- <button mat-icon-button aria-label="Attachment">
                     <mat-icon>attachment</mat-icon>
-                </button>
+                </button> -->
                 <!-- / ATTACHMENT -->
 
                 <!-- CHECKLIST -->
@@ -424,7 +424,7 @@
                                     {{board.members | getById: comment.idMember:'firstName'}} {{board.members | getById: comment.idMember:'lastName'}}
                                 </div>
                                 <div class="comment-bubble">{{comment.message}}</div>
-                                <div class="comment-time secondary-text">{{comment.time | date: 'dd/MM/yyyy'}}</div>
+                                <div class="comment-time secondary-text">{{comment.time | date: 'dd/MM/yyyy HH:mm:ss'}}</div>
                             </div>
                         </div>
                     </div>
@@ -448,7 +448,7 @@
                                  [src]="board.members| getById:activity.idMember:'avatar'">
                             <div class="activity-member-name">{{board.members| getById:activity.idMember:'name'}}</div>
                             <div class="activity-message">{{activity.message}}</div>
-                            <div class="activity-time secondary-text">{{activity.time | date: 'dd/MM/yyyy'}}</div>
+                            <div class="activity-time secondary-text">{{activity.time | date: 'dd/MM/yyyy HH:mm:ss'}}</div>
                         </div>
                     </div>
 
