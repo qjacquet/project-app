@@ -8,7 +8,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 const routes: Routes = [
     {
-        path     : 'apps/dashboards/project',
+        path     : 'project',
         component: ProjectComponent,
         resolve  : {
             data: ProjectsDashboardService

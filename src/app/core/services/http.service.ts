@@ -44,7 +44,7 @@ export class HttpService extends Http {
     // we have to pass HttpService's own instance here as `self`
     return (res: Response) => {
       if (res.status === 401 || res.status === 403) {
-        this.authService.logout();
+        this.authService.logout(true);
       }
       return Observable.throw(res);
     };

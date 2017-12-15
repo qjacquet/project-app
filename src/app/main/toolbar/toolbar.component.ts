@@ -109,6 +109,6 @@ export class ToolbarComponent
 
     logout()
     {
-        this.authService.logout();
+        this.authService.logout(true);
     }
 }

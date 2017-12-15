@@ -28,3 +28,19 @@ export class OnlyLoggedInUsersGuard implements CanActivate {
       return false;
   }
 }
+
+@Injectable()
+export class OnlyVisitorGuard implements CanActivate { 
+  constructor(
+    private router: Router,
+  ) {}; 
+
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+      if (localStorage.getItem('token')) {
+          this.router.navigate(['/']);
+          return false;
+      }
+
+      return true;
+  }
+}

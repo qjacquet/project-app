@@ -35,6 +35,11 @@ const appRoutes: Routes = [
         canActivate: [OnlyLoggedInUsersGuard, AuthGuard]
     },
     {
+        path        : 'apps/dashboards/project',
+        loadChildren: './main/content/apps/dashboards/project/project.module#ProjectModule',
+        canActivate: [OnlyLoggedInUsersGuard, AuthGuard]
+    },
+    {
         path      : '**',
         redirectTo: 'apps/dashboards/project',
         canActivate: [OnlyLoggedInUsersGuard, AuthGuard]
