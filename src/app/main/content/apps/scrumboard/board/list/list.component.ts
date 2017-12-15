@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Utils } from '../../../../../../core/utils';
-import { ScrumboardService } from 'app/main/content/apps/scrumboard/scrumboard.service';
+import { ScrumboardService } from '../../scrumboard.service';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { MatDialog, MatDialogRef } from '@angular/material';
