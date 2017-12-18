@@ -3,6 +3,7 @@ import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { ConfigService } from '../../core/services/config.service';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../core/services/auth.service';
+import { Utils } from '../../core/utils';
 
 import { User } from '../../core/models/user';
 import { UserService } from '../../core/services/user.service';
@@ -89,7 +90,7 @@ export class ToolbarComponent
             this.horizontalNav = settings.layout.navigation === 'top';
         });
 
-        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.currentUser = Utils.getCurrentUser();
     }
 
     search(value)

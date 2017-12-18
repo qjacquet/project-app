@@ -1,4 +1,5 @@
 import { User } from './models/user'
+import { JwtHelper } from 'angular2-jwt';
 
 export class Utils
 {
@@ -117,7 +118,12 @@ export class Utils
     public static getCurrentUser()
     {
         var user = new User();
-        user = JSON.parse(localStorage.getItem('currentUser'));
+
+        if (localStorage.getItem('token')){
+            var jwtHelper = new JwtHelper();
+            user = jwtHelper.decodeToken(localStorage.getItem('token'));
+        }
+
         return user;
     }
 }

@@ -90,7 +90,6 @@ export class LoginComponent implements OnInit
                     }
                     if (data.success == true) {
                         localStorage.setItem('token', data.token);
-                        localStorage.setItem('currentUser', JSON.stringify(this.jwtHelper.decodeToken(data.token)));
                         this.router.navigateByUrl(this.redirectUrl);
                     }
                 },

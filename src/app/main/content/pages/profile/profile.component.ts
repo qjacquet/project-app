@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Animations } from '../../../../core/animations';
 import { User } from '../../../../core/models/user';
 import { UserService } from '../../../../core/services/user.service';
+import { Utils } from '../../../../core/utils';
 
 @Component({
     selector     : 'profile',
@@ -22,6 +23,6 @@ export class ProfileComponent implements OnInit
 
     ngOnInit()
     {
-        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        this.currentUser = Utils.getCurrentUser();
     }
 }
