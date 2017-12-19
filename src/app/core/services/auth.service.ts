@@ -48,7 +48,6 @@ export class AuthService implements Resolve<any>
     logout(redirect?: boolean)
     {
         localStorage.removeItem('token');
-        localStorage.removeItem('currentUser');
 
         if (redirect) {
             this.router.navigate(['login']);
