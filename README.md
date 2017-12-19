@@ -1,4 +1,4 @@
-# angular-material-dashboard
+# project-app
 
 App built with Material Design and Angular
 
@@ -14,4 +14,4 @@ App built with Material Design and Angular
 
 # configure
  
-In "environment/environment.ts", set the server URI.
+in "environment/environment.ts", set the server URI.
