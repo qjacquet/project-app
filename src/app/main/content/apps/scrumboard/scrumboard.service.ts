@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
 import { HttpService } from '../../../../core/services/http.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Utils } from '../../../../core/utils';
 
 @Injectable()
 export class ScrumboardService implements Resolve<any>
@@ -47,7 +48,7 @@ export class ScrumboardService implements Resolve<any>
     getBoards(): Promise<any>
     {
         return new Promise((resolve, reject) => {
-            this.http.get('http://127.0.0.1:3000/scrumboards/')
+            this.http.get(Utils.getApiUri('/scrumboards/'))
                 .subscribe((response: any) => {
                     this.boards = response;
                     this.onBoardsChanged.next(this.boards);
@@ -59,7 +60,7 @@ export class ScrumboardService implements Resolve<any>
     getBoard(boardId): Promise<any>
     {
         return new Promise((resolve, reject) => {
-            this.http.get('http://127.0.0.1:3000/scrumboards/' + boardId)
+            this.http.get(Utils.getApiUri('/scrumboards/') + boardId)
                 .subscribe((response: any) => {
                     this.board = response;
                     this.onBoardChanged.next(this.board);
@@ -71,7 +72,7 @@ export class ScrumboardService implements Resolve<any>
     getUsers(): Promise<any>
     {
         return new Promise((resolve, reject) => {
-            this.http.get('http://127.0.0.1:3000/users/')
+            this.http.get(Utils.getApiUri('/scrumboards/'))
                 .subscribe((response: any) => {
                     this.board.members = response;
                     resolve(this.board);
@@ -143,7 +144,7 @@ export class ScrumboardService implements Resolve<any>
     updateBoard()
     {
         return new Promise((resolve, reject) => {
-            this.http.put('http://127.0.0.1:3000/scrumboards/' + this.board._id, this.board)
+            this.http.put(Utils.getApiUri('/scrumboards/') + this.board._id, this.board)
                 .subscribe(response => {
                     this.onBoardChanged.next(this.board);
                     resolve(this.board);
@@ -154,7 +155,7 @@ export class ScrumboardService implements Resolve<any>
     deleteBoard()
     {
         return new Promise((resolve, reject) => {
-            this.http.delete('http://127.0.0.1:3000/scrumboards/' + this.board._id)
+            this.http.delete(Utils.getApiUri('/scrumboards/') + this.board._id)
                 .subscribe(response => {
                     this.onBoardChanged.next(this.board);
                     this.router.navigate(['/apps/scrumboard/boards']);
@@ -177,7 +178,7 @@ export class ScrumboardService implements Resolve<any>
     createNewBoard(board)
     {
         return new Promise((resolve, reject) => {
-            this.http.post('http://127.0.0.1:3000/scrumboards/', board)
+            this.http.post(Utils.getApiUri('/scrumboards/'), board)
                 .subscribe(response => {
                     board = response;
                     this.router.navigate(['/apps/scrumboard/boards/' + board._id]);

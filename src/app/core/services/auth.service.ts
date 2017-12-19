@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Utils } from '../utils';
 import 'rxjs/add/operator/map';
 
 @Injectable()
@@ -41,7 +42,7 @@ export class AuthService implements Resolve<any>
 
     signin(userForm) : Observable<any>
     {
-        return this.http.post('http://127.0.0.1:3000/auth/', userForm);
+        return this.http.post(Utils.getApiUri('/auth'), userForm);
     }
 
     logout(redirect?: boolean)

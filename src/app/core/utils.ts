@@ -1,5 +1,6 @@
 import { User } from './models/user'
 import { JwtHelper } from 'angular2-jwt';
+import { environment } from '../../environments/environment';
 
 export class Utils
 {
@@ -113,6 +114,10 @@ export class Utils
                    .replace(/\-\-+/g, '-')         // Replace multiple - with single -
                    .replace(/^-+/, '')             // Trim - from start of text
                    .replace(/-+$/, '');            // Trim - from end of text
+    }
+
+    public static getApiUri(methodToCall){
+        return environment.server + methodToCall;
     }
 
     public static getCurrentUser()

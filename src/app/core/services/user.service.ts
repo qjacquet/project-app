@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from '../services/http.service';
+import { Utils } from '../utils';
 import { User } from '../models/user';
 
 @Injectable()
@@ -7,22 +8,22 @@ export class UserService {
     constructor(private http: HttpService) { }
 
     getAll() {
-        return this.http.get('http://localhost:3000/users');
+        return this.http.get(Utils.getApiUri('/users/'));
     }
 
     getById(id: number) {
-        return this.http.get('http://localhost:3000/users/' + id);
+        return this.http.get(Utils.getApiUri('/users/') + id);
     }
 
     create(user: any) {
-        return this.http.post('http://localhost:3000/users', user);
+        return this.http.post(Utils.getApiUri('/users/'), user);
     }
 
     update(user: User) {
-        return this.http.put('http://localhost:3000/users/' + user.id, user);
+        return this.http.put(Utils.getApiUri('/users/') + user.id, user);
     }
 
     delete(id: number) {
-        return this.http.delete('http://localhost:3000/users/' + id);
+        return this.http.delete(Utils.getApiUri('/users/') + id);
     }
 }
