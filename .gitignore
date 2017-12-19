@@ -8,9 +8,6 @@
 # dependencies
 /node_modules
 
-# config
-/src/environments
-
 # IDEs and editors
 /.idea
 .project
@@ -36,6 +33,7 @@ npm-debug.log
 testem.log
 /typings
 package-lock.json
+/src/environments
 
 # e2e
 /e2e/*.js
