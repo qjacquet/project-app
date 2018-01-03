@@ -6,6 +6,7 @@ import { NgForm } from '@angular/forms/src/forms';
 import { Utils } from '../../../../../../../core/utils';
 import { ConfirmDialogComponent } from '../../../../../../../core/components/confirm-dialog/confirm-dialog.component';
 import { User } from '../../../../../../../core/models/user';
+import { AuthService } from '../../../../../../../core/services/auth.service';
 
 @Component({
     selector     : 'scrumboard-board-card-dialog',
@@ -32,10 +33,11 @@ export class ScrumboardCardDialogComponent implements OnInit, OnDestroy
         public dialogRef: MatDialogRef<ScrumboardCardDialogComponent>,
         @Inject(MAT_DIALOG_DATA) private data: any,
         public dialog: MatDialog,
-        private scrumboardService: ScrumboardService
+        private scrumboardService: ScrumboardService,
+        private authService: AuthService
     )
     {
-        this.currentUser = Utils.getCurrentUser();
+        this.currentUser = authService.getCurrentUser();
     }
 
     ngOnInit()

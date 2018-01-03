@@ -88,7 +88,7 @@ export class ToolbarComponent
             this.horizontalNav = settings.layout.navigation === 'top';
         });
 
-        this.currentUser = Utils.getCurrentUser();
+        this.currentUser = authService.getCurrentUser();
     }
 
     search(value)

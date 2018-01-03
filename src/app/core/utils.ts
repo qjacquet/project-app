@@ -1,5 +1,3 @@
-import { User } from './models/user'
-import { JwtHelper } from 'angular2-jwt';
 import { environment } from '../../environments/environment';
 
 export class Utils
@@ -118,17 +116,5 @@ export class Utils
 
     public static getApiUri(methodToCall){
         return environment.server + methodToCall;
-    }
-
-    public static getCurrentUser()
-    {
-        var user = new User();
-
-        if (localStorage.getItem('token')){
-            var jwtHelper = new JwtHelper();
-            user = jwtHelper.decodeToken(localStorage.getItem('token'));
-        }
-
-        return user;
     }
 }

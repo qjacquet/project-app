@@ -5,6 +5,8 @@ import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Utils } from '../utils';
+import { User } from '../models/user';
+import { JwtHelper } from 'angular2-jwt';
 import 'rxjs/add/operator/map';
 
 @Injectable()
@@ -65,5 +67,27 @@ export class AuthService implements Resolve<any>
             return true;
         }
         return false;
+    }
+
+    isAdmin()
+    {
+        var user = this.getCurrentUser();
+
+        if (user.admin)
+            return true;
+        
+        return false;
+    }
+
+    getCurrentUser()
+    {
+        var user = new User();
+
+        if (localStorage.getItem('token')){
+            var jwtHelper = new JwtHelper();
+            user = jwtHelper.decodeToken(localStorage.getItem('token'));
+        }
+
+        return user;
     }
 }
