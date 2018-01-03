@@ -20,6 +20,7 @@ export class OnlyLoggedInUsersGuard implements CanActivate {
   ) {}; 
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+
       if (localStorage.getItem('token')) {
           return true;
       }

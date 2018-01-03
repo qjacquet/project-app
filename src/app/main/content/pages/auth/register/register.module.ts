@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../../../../../core/modules/shared.module';
 import { RouterModule } from '@angular/router';
-import { UserService } from '../../../../../core/services/user.service';
+import { AuthService } from '../../../../../core/services/auth.service';
 import { RegisterComponent } from './register.component';
 
 const routes = [
@@ -20,7 +20,7 @@ const routes = [
         RouterModule.forChild(routes)
     ],
     providers   :[
-        UserService
+        AuthService
     ]
 })
 

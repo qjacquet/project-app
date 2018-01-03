@@ -12,7 +12,6 @@ import { PagesModule } from './main/content/pages/pages.module';
 import { AppComponent } from './app.component';
 import { ProjectModule } from './main/content/apps/dashboards/project/project.module';
 import { FakeDbService } from './fake-db/fake-db.service';
-import { UserService } from './core/services/user.service';
 import { MainModule } from './main/main.module';
 import { SplashScreenService } from './core/services/splash-screen.service';
 import { ConfigService } from './core/services/config.service';
@@ -85,7 +84,6 @@ const appRoutes: Routes = [
         NavigationService,
         AuthGuard,
         OnlyLoggedInUsersGuard,
-        UserService,
         JwtHelper
     ],
     bootstrap   : [

@@ -6,7 +6,6 @@ import { AuthService } from '../../core/services/auth.service';
 import { Utils } from '../../core/utils';
 
 import { User } from '../../core/models/user';
-import { UserService } from '../../core/services/user.service';
 
 @Component({
     selector   : 'toolbar',
@@ -27,7 +26,6 @@ export class ToolbarComponent
         private router: Router,
         private Config: ConfigService,
         private translate: TranslateService,
-        private userService: UserService,
         private authService: AuthService
     )
     {

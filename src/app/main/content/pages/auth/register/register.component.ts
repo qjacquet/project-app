@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfigService } from '../../../../../core/services/config.service';
 import { Animations } from '../../../../../core/animations';
 
-import { UserService } from '../../../../../core/services/user.service';
+import { AuthService } from '../../../../../core/services/auth.service';
 import { User } from '../../../../../core/models/user';
 
 @Component({
@@ -22,7 +22,7 @@ export class RegisterComponent implements OnInit
     constructor(
         private Config: ConfigService,
         private formBuilder: FormBuilder,
-        private userService: UserService,
+        private authService: AuthService,
         private router: Router,
         private route: ActivatedRoute,
     )
@@ -93,7 +93,7 @@ export class RegisterComponent implements OnInit
     signup() 
     {   
         this.setUser();
-        this.userService.create(this.user)
+        this.authService.register(this.user)
             .subscribe(response => {
                 this.router.navigateByUrl('login');
             });

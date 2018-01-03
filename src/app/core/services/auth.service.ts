@@ -45,6 +45,11 @@ export class AuthService implements Resolve<any>
         return this.http.post(Utils.getApiUri('/auth'), userForm);
     }
 
+    register(userForm) : Observable<any>
+    {
+        return this.http.post(Utils.getApiUri('/register'), userForm);
+    }
+
     logout(redirect?: boolean)
     {
         localStorage.removeItem('token');
