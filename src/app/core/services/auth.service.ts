@@ -42,19 +42,31 @@ export class AuthService implements Resolve<any>
         });
     }
 
+    /**
+     * Call auth method
+     * @param userForm 
+     */
     signin(userForm) : Observable<any>
     {
         return this.http.post(Utils.getApiUri('/auth'), userForm);
     }
 
+    /**
+     * Call register method
+     * @param userForm 
+     */
     register(userForm) : Observable<any>
     {
         return this.http.post(Utils.getApiUri('/register'), userForm);
     }
 
+    /** 
+     * Helper methods 
+     */
+
     logout(redirect?: boolean)
     {
-        localStorage.removeItem('token');
+        this.removeToken();
 
         if (redirect) {
             this.router.navigate(['login']);
@@ -63,7 +75,7 @@ export class AuthService implements Resolve<any>
 
     isLogged()
     {
-        if (localStorage.getItem('token')){
+        if (this.getToken()){
             return true;
         }
         return false;
@@ -79,13 +91,26 @@ export class AuthService implements Resolve<any>
         return false;
     }
 
+    setToken(token){
+        localStorage.setItem('token', token);
+    }
+
+    getToken(){
+        return localStorage.getItem('token');
+    }
+
+    removeToken(){
+        localStorage.removeItem('token');
+    }
+
     getCurrentUser()
     {
         var user = new User();
+        var token = this.getToken();
 
-        if (localStorage.getItem('token')){
+        if (token){
             var jwtHelper = new JwtHelper();
-            user = jwtHelper.decodeToken(localStorage.getItem('token'));
+            user = jwtHelper.decodeToken(token);
         }
 
         return user;
