@@ -15,7 +15,7 @@ export class HttpService extends Http {
     options: RequestOptions,
     authService : AuthService
   ) {
-    let token = localStorage.getItem('token'); // your custom token getter function here
+    let token = authService.getToken(); // your custom token getter function here
     options.headers.set('Authorization', token);
     super(backend, options);
 
@@ -23,7 +23,7 @@ export class HttpService extends Http {
   }
 
   request(url: string|Request, options?: RequestOptionsArgs): Observable<Response> {
-    let token = localStorage.getItem('token');
+    let token = this.authService.getToken();
 
     if (typeof url === 'string') { // meaning we have to add the token to the options, not in url
       if (!options) {

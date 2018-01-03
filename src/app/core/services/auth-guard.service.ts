@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, CanActivateChild, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild {
@@ -14,14 +15,15 @@ export class AuthGuard implements CanActivate, CanActivateChild {
 }
 
 @Injectable()
-export class OnlyLoggedInUsersGuard implements CanActivate { 
+export class OnlyLoggedInUsersGuard implements CanActivate {
   constructor(
     private router: Router,
+    private authService : AuthService
   ) {}; 
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
-      if (localStorage.getItem('token')) {
+      if (this.authService.isLogged()) {
           return true;
       }
 
@@ -34,14 +36,15 @@ export class OnlyLoggedInUsersGuard implements CanActivate {
 export class OnlyVisitorGuard implements CanActivate { 
   constructor(
     private router: Router,
+    private authService : AuthService
   ) {}; 
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-      if (localStorage.getItem('token')) {
+      if (this.authService.isLogged()) {
           this.router.navigate(['/']);
           return false;
       }
-
+      
       return true;
   }
 }
