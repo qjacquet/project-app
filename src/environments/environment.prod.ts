@@ -2,5 +2,5 @@ export const environment = {
     production: true,
     hmr       : false,
 
-    server    : ''
+    server    : 'http://localhost:3000'
 };
