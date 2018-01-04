@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
 import { HttpService } from '../../../../core/services/http.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { AuthService } from '../../../../core/services/auth.service';
 import { Utils } from '../../../../core/utils';
 
 @Injectable()
@@ -19,6 +20,7 @@ export class ScrumboardService implements Resolve<any>
     constructor(
         private http: HttpService,
         private router: Router,
+        private authService: AuthService
     )
     {
     }
@@ -177,6 +179,8 @@ export class ScrumboardService implements Resolve<any>
 
     createNewBoard(board)
     {
+        this.setNewBoard(board);
+
         return new Promise((resolve, reject) => {
             this.http.post(Utils.getApiUri('/scrumboards/'), board)
                 .subscribe(response => {
@@ -184,6 +188,10 @@ export class ScrumboardService implements Resolve<any>
                     this.router.navigate(['/apps/scrumboard/boards/' + board._id]);
                 }, reject);
         });
+    }
+
+    setNewBoard(board){
+        board.members = [this.authService.getCurrentUserAsMember()]
     }
 }
 
