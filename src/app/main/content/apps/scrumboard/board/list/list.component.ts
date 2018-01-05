@@ -8,6 +8,8 @@ import { ScrumboardCardDialogComponent } from '../dialogs/card/card.component';
 import { ConfirmDialogComponent } from '../../../../../../core/components/confirm-dialog/confirm-dialog.component';
 import { Card } from '../../card.model';
 import { PerfectScrollbarDirective } from '../../../../../../core/directives/perfect-scrollbar/perfect-scrollbar.directive';
+import { AuthService } from '../../../../../../core/services/auth.service';
+
 
 @Component({
     selector     : 'scrumboard-board-list',
@@ -30,6 +32,7 @@ export class ScrumboardBoardListComponent implements OnInit, OnDestroy
     constructor(
         private route: ActivatedRoute,
         private scrumboardService: ScrumboardService,
+        private authService: AuthService,
         public dialog: MatDialog
     )
     {
@@ -57,12 +60,17 @@ export class ScrumboardBoardListComponent implements OnInit, OnDestroy
             return;
         }
 
-        this.scrumboardService.addCard(this.list.id, new Card({name: newCardName}));
+        this.scrumboardService
+            .addCard(this.list.id, 
+                new Card({
+                    name: newCardName,
+                    idMembers: this.authService.getCurrentUserAsMember()._id
+                })
+        );
 
         setTimeout(() => {
             this.listScroll.scrollToBottom(0, 400);
         });
-
     }
 
     removeList(listId)
