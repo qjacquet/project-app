@@ -12,6 +12,13 @@
         <div class="content py-16" PerfectScrollbar>
 
             <div class="nav">
+
+                <div class="nav-group nav-item">
+                    <div class="group-title">
+                        <span class="hint-text">Options</span>
+                    </div>
+                </div>
+
                 <div class="nav-item">
                     <div class="nav-link" matRipple (click)="view = 'board-color'">
                         <mat-icon class="nav-link-icon">format_color_fill</mat-icon>
@@ -35,10 +42,16 @@
                     </div>
                 </div>
 
+                <div class="nav-group nav-item">
+                    <div class="group-title">
+                        <span class="hint-text">Actions</span>
+                    </div>
+                </div>
+
                 <div class="nav-item">
                     <div class="nav-link" matRipple>
-                        <mat-icon class="nav-link-icon">content_copy</mat-icon>
-                        <p class="title">Copy Board</p>
+                        <mat-icon class="nav-link-icon">group_add</mat-icon>
+                        <p class="title">Invite users</p>
                     </div>
                 </div>
 
