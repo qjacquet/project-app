@@ -76,7 +76,7 @@ export class ScrumboardService implements Resolve<any>
         return new Promise((resolve, reject) => {
             this.http.get(Utils.getApiUri('/users/'))
                 .subscribe((response: any) => {
-                    this.board.members = response;
+                    //this.board.members = response;
                     resolve(this.board);
                 }, reject);
         });
@@ -191,7 +191,7 @@ export class ScrumboardService implements Resolve<any>
     }
 
     setNewBoard(board){
-        board.members = [this.authService.getCurrentUserAsMember()]
+        board.members = [this.authService.getCurrentUserAsMember(true)]
     }
 }
 

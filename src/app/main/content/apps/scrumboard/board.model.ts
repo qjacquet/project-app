@@ -59,7 +59,8 @@ export class Board
         id: string,
         firstName: string,
         lastName: string,
-        avatar: string
+        avatar: string,
+        owner: boolean
     }[];
     labels: {
         id: string,

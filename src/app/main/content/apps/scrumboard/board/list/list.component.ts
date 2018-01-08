@@ -64,7 +64,7 @@ export class ScrumboardBoardListComponent implements OnInit, OnDestroy
             .addCard(this.list.id, 
                 new Card({
                     name: newCardName,
-                    idMembers: this.authService.getCurrentUserAsMember()._id
+                    idMembers: this.authService.getCurrentUser().id
                 })
         );
 
@@ -91,7 +91,6 @@ export class ScrumboardBoardListComponent implements OnInit, OnDestroy
 
     openCardDialog(cardId)
     {
-        this.scrumboardService.getUsers();
         this.dialogRef = this.dialog.open(ScrumboardCardDialogComponent, {
             panelClass: 'scrumboard-card-dialog',
             data      : {

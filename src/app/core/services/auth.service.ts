@@ -116,13 +116,14 @@ export class AuthService implements Resolve<any>
         return user;
     }
 
-    getCurrentUserAsMember(){
+    getCurrentUserAsMember(isOwner){
         var user = this.getCurrentUser()
         return {
             _id : user.id,
             avatar: user.avatar,
             lastName: user.lastName,
-            firstName: user.firstName
+            firstName: user.firstName,
+            owner: isOwner
         }
     }
 }
