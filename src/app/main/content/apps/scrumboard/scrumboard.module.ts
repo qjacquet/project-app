@@ -14,6 +14,7 @@ import { ScrumboardLabelSelectorComponent } from './board/dialogs/card/label-sel
 import { ScrumboardEditBoardNameComponent } from './board/edit-board-name/edit-board-name.component';
 import { ScrumboardBoardSettingsSidenavComponent } from './board/sidenavs/settings/settings.component';
 import { ScrumboardBoardColorSelectorComponent } from './board/sidenavs/settings/board-color-selector/board-color-selector.component';
+import { ScrumboardBoardUserInviteComponent } from './board/sidenavs/settings/board-user-invite/board-user-invite.component';
 
 const routes: Routes = [
     {
@@ -49,7 +50,8 @@ const routes: Routes = [
         ScrumboardLabelSelectorComponent,
         ScrumboardEditBoardNameComponent,
         ScrumboardBoardSettingsSidenavComponent,
-        ScrumboardBoardColorSelectorComponent
+        ScrumboardBoardColorSelectorComponent,
+        ScrumboardBoardUserInviteComponent
     ],
     imports        : [
         SharedModule,

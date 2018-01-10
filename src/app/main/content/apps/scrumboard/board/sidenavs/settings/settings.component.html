@@ -49,7 +49,7 @@
                 </div>
 
                 <div class="nav-item">
-                    <div class="nav-link" matRipple>
+                    <div class="nav-link" matRipple (click)="view = 'board-user-invite'">
                         <mat-icon class="nav-link-icon">group_add</mat-icon>
                         <p class="title">Invite users</p>
                     </div>
@@ -68,6 +68,7 @@
         <!-- / SIDENAV CONTENT -->
     </div>
 
+    <!-- COLOR SELECTOR -->
     <div class="view" *ngSwitchCase="'board-color'" [@slideInRight]>
 
         <!-- SIDENAV HEADER -->
@@ -85,5 +86,25 @@
         </div>
         <!-- / SIDENAV CONTENT -->
 
+    </div>
+
+    <!-- USER MANAGER -->
+    <div class="view" *ngSwitchCase="'board-user-invite'" [@slideInRight]>
+    
+        <!-- SIDENAV HEADER -->
+        <div class="header mat-accent-bg px-24" [ngClass]="'mat-'+board.settings.color+'-bg'" fxLayout="row" fxLayoutAlign="space-between center">
+            <div>Manage Users</div>
+            <button mat-icon-button (click)="view ='main'">
+                <mat-icon class="s-16">arrow_back</mat-icon>
+            </button>
+        </div>
+        <!-- / SIDENAV HEADER -->
+    
+        <!-- SIDENAV CONTENT -->
+        <div class="content p-8" PerfectScrollbar>
+            <scrumboard-board-user-invite></scrumboard-board-user-invite>
+        </div>
+        <!-- / SIDENAV CONTENT -->
+    
     </div>
 </div>
