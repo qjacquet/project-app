@@ -103,7 +103,7 @@ export class AuthService implements Resolve<any>
         localStorage.removeItem('token');
     }
 
-    getCurrentUser()
+    getCurrentUser(): User
     {
         var user = new User();
         var token = this.getToken();
@@ -114,16 +114,5 @@ export class AuthService implements Resolve<any>
         }
 
         return user;
-    }
-
-    getCurrentUserAsMember(isOwner){
-        var user = this.getCurrentUser()
-        return {
-            _id : user.id,
-            avatar: user.avatar,
-            lastName: user.lastName,
-            firstName: user.firstName,
-            owner: isOwner
-        }
     }
 }

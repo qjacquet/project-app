@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { HttpService } from '../../../../core/services/http.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { AuthService } from '../../../../core/services/auth.service';
+import { User } from '../../../../core/models/user';
 import { Utils } from '../../../../core/utils';
 
 @Injectable()
@@ -13,6 +14,7 @@ export class ScrumboardService implements Resolve<any>
     boards: any[];
     routeParams: any;
     board: any;
+    currentUser : User;
 
     onBoardsChanged: BehaviorSubject<any> = new BehaviorSubject([]);
     onBoardChanged: BehaviorSubject<any> = new BehaviorSubject([]);
@@ -23,6 +25,7 @@ export class ScrumboardService implements Resolve<any>
         private authService: AuthService
     )
     {
+        this.currentUser = this.authService.getCurrentUser();
     }
 
     /**
@@ -190,7 +193,19 @@ export class ScrumboardService implements Resolve<any>
     }
 
     setNewBoard(board){
-        board.members = [this.authService.getCurrentUserAsMember(true)]
+        board.members = [this.getMemberFormat(this.currentUser, true)]
+    }
+
+    getMemberFormat(user: User, isOwner): any
+    {
+        return {
+            _id: user.id,
+            id: user.id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            avatar: user.avatar,
+            owner: isOwner
+        }
     }
 }
 

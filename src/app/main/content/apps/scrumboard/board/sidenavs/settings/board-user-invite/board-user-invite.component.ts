@@ -80,20 +80,9 @@ export class ScrumboardBoardUserInviteComponent implements OnInit, OnDestroy
         }
     }
 
-    getMemberFormat(user: User)
-    {
-        return {
-            _id: user._id,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            avatar: user.avatar,
-            owner: false
-        }
-    }
-
     addMember(user: User)
     {
-        this.board.members.push(this.getMemberFormat(user));
+        this.board.members.push(this.scrumboardService.getMemberFormat(user, false));
         this.scrumboardService.updateBoard();
     }
 
