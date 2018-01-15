@@ -3,6 +3,7 @@ import { ScrumboardService } from '../../../../scrumboard.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { User } from '../../../../../../../../core/models/user';
+import { AuthService } from '../../../../../../../../core/services/auth.service';
 import { Utils } from '../../../../../../../../core/utils';
 
 @Component({
@@ -16,16 +17,17 @@ export class ScrumboardBoardUserInviteComponent implements OnInit, OnDestroy
     inviteFormErrors: any;
 
     board: any;
-    card: any;
-    list: any;
     onBoardChanged: Subscription;
     users: User[];    
+    currentUser: User;
 
     constructor(
         private scrumboardService: ScrumboardService,
-        private formBuilder: FormBuilder
+        private formBuilder: FormBuilder,
+        private authService: AuthService
     )
     {
+        this.currentUser = authService.getCurrentUser();
         this.inviteFormErrors = {
             email   : {},
             message: {},
@@ -35,11 +37,9 @@ export class ScrumboardBoardUserInviteComponent implements OnInit, OnDestroy
         scrumboardService
             .getUsers()
             .then((data) => {
-                console.log(data);
                 this.users = data;
             })
             .catch((ex) => {
-                console.log(ex);
             })
     }
 
@@ -85,15 +85,18 @@ export class ScrumboardBoardUserInviteComponent implements OnInit, OnDestroy
 
     addMember(user: User)
     {
-        this.board.members.push(this.scrumboardService.getMemberFormat(user, false));
-        this.scrumboardService.updateBoard();
+        if (this.board.members.filter(item => item.id === user._id).length === 0) {
+            this.board.members.push(this.scrumboardService.getMemberFormat(user, false));
+            this.scrumboardService.updateBoard();
+        }
     }
 
     deleteMember(user: User)
     {
         // Delete member from all cards in this board
         for (let i = 0; i < this.board.cards.length; i++){
-            Utils.toggleInArray(user._id, this.board.cards[i].idMembers);
+            this.board.cards[i].idMembers = this.board.cards[i].idMembers.filter(item => item !== user._id);
+           // Utils.toggleInArray(user._id, this.board.cards[i].idMembers);
         }
 
         // Delete member from member selection in this board

@@ -1,13 +1,53 @@
-<mat-list class="users">
-    <mat-list-item class="color mat-blue-bg" *ngFor="let user of users" (click)="addMember(user)" matRipple>
+<!-- <mat-list class="users">
+    <mat-list-item class="color mat-blue" *ngFor="let user of users" (click)="addMember(user)" matRipple>
         <p fxFlex>{{user.firstName}} {{user.lastName}}</p>
-        <!-- <mat-icon class="s-16" >check</mat-icon> -->
+        <mat-icon class="s-16" >check</mat-icon>
         <button mat-icon-button (click)="$event.stopPropagation();deleteMember(user)">
             <mat-icon class="s-16">delete</mat-icon>
         </button>
     </mat-list-item>
-</mat-list>
+</mat-list> -->
 
+<!-- SIDENAV CONTENT -->
+
+<div class="nav">
+    <div class="nav-group nav-item">
+        <div class="group-title">
+            <span class="hint-text">Search a user</span>
+        </div>
+        <div class="nav-item">
+            <div class="nav-link">
+                <p fxFlex>
+                    <mat-form-field floatPlaceholder="never" fxFlex>
+                        <input #userSearch matInput [(ngModel)]="query" placeholder="Search user with tag">
+                    </mat-form-field>
+                </p>
+            </div>
+        </div>
+        <div *ngIf="userSearch.value.length >= 3">
+            <div class="nav-link" *ngFor="let user of users | search:'firstName,lastName':query">
+                <img [src]=" user.avatar" class="avatar" />
+                <p fxFlex class="title">{{user.firstName}} {{user.lastName}}</p>
+                <mat-icon *ngIf="user._id != currentUser.id" class="s-18" matRipple (click)="$event.stopPropagation();addMember(user)">person_add</mat-icon>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav-group nav-item" PerfectScrollbar>
+        <div class="group-title">
+            <span class="hint-text">Current Members</span>
+        </div>
+        <div class="nav-item">
+            <div class="nav-link" *ngFor="let member of board.members">
+                <img [src]=" member.avatar" class="avatar" />
+                <p fxFlex class="title">{{member.firstName}} {{member.lastName}}</p>
+                <mat-icon *ngIf="!member.owner" class="s-18" matRipple (click)="$event.stopPropagation();deleteMember(member)">delete</mat-icon>
+            </div>
+        </div>
+    </div>
+    <!-- <mat-divider></mat-divider> -->
+</div>
+<!-- / SIDENAV CONTENT -->
 
 <!-- <form name="inviteForm" [formGroup]="inviteForm" novalidate>
     <mat-form-field>

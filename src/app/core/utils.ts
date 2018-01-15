@@ -103,7 +103,7 @@ export class Utils
             array.splice(array.indexOf(item), 1);
         }
     }
-
+    
     public static handleize(text)
     {
         return text.toString().toLowerCase()

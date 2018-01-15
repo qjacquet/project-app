@@ -207,6 +207,8 @@ export class ScrumboardService implements Resolve<any>
             owner: isOwner
         }
     }
+
+
 }
 
 @Injectable()

@@ -5,6 +5,7 @@ import { GetByIdPipe } from './getById.pipe';
 import { HtmlToPlaintextPipe } from './htmlToPlaintext.pipe';
 import { FilterPipe } from './filter.pipe';
 import { CamelCaseToDashPipe } from './camelCaseToDash.pipe';
+import { SearchPipe } from './search.pipe';
 
 @NgModule({
     declarations: [
@@ -12,7 +13,8 @@ import { CamelCaseToDashPipe } from './camelCaseToDash.pipe';
         GetByIdPipe,
         HtmlToPlaintextPipe,
         FilterPipe,
-        CamelCaseToDashPipe
+        CamelCaseToDashPipe,
+        SearchPipe
 
     ],
     imports     : [],
@@ -21,7 +23,8 @@ import { CamelCaseToDashPipe } from './camelCaseToDash.pipe';
         GetByIdPipe,
         HtmlToPlaintextPipe,
         FilterPipe,
-        CamelCaseToDashPipe
+        CamelCaseToDashPipe,
+        SearchPipe
     ]
 })
 
