@@ -83,6 +83,16 @@ export class ScrumboardBoardUserInviteComponent implements OnInit, OnDestroy
         }
     }
 
+    isInArray(id, array)
+    {
+        if (array.filter(item => item.id === id).length > 0){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     addMember(user: User)
     {
         if (this.board.members.filter(item => item.id === user._id).length === 0) {
@@ -96,7 +106,6 @@ export class ScrumboardBoardUserInviteComponent implements OnInit, OnDestroy
         // Delete member from all cards in this board
         for (let i = 0; i < this.board.cards.length; i++){
             this.board.cards[i].idMembers = this.board.cards[i].idMembers.filter(item => item !== user._id);
-           // Utils.toggleInArray(user._id, this.board.cards[i].idMembers);
         }
 
         // Delete member from member selection in this board

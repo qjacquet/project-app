@@ -28,7 +28,8 @@
             <div class="nav-link" *ngFor="let user of users | search:'firstName,lastName':query">
                 <img [src]=" user.avatar" class="avatar" />
                 <p fxFlex class="title">{{user.firstName}} {{user.lastName}}</p>
-                <mat-icon *ngIf="user._id != currentUser.id" class="s-18" matRipple (click)="$event.stopPropagation();addMember(user)">person_add</mat-icon>
+                <mat-icon *ngIf="!isInArray(user._id, board.members)" 
+                    class="s-18" matRipple (click)="$event.stopPropagation();addMember(user)">person_add</mat-icon>
             </div>
         </div>
     </div>
