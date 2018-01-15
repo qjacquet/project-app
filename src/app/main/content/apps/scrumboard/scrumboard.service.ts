@@ -199,8 +199,8 @@ export class ScrumboardService implements Resolve<any>
     getMemberFormat(user: User, isOwner): any
     {
         return {
-            _id: user.id,
-            id: user.id,
+            _id: user.id || user._id,
+            id: user._id|| user.id,
             firstName: user.firstName,
             lastName: user.lastName,
             avatar: user.avatar,

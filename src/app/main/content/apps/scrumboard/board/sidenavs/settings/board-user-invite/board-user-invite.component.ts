@@ -3,6 +3,7 @@ import { ScrumboardService } from '../../../../scrumboard.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { User } from '../../../../../../../../core/models/user';
+import { Utils } from '../../../../../../../../core/utils';
 
 @Component({
     selector   : 'scrumboard-board-user-invite',
@@ -15,8 +16,10 @@ export class ScrumboardBoardUserInviteComponent implements OnInit, OnDestroy
     inviteFormErrors: any;
 
     board: any;
+    card: any;
+    list: any;
     onBoardChanged: Subscription;
-    users: User[];
+    users: User[];    
 
     constructor(
         private scrumboardService: ScrumboardService,
@@ -88,7 +91,14 @@ export class ScrumboardBoardUserInviteComponent implements OnInit, OnDestroy
 
     deleteMember(user: User)
     {
+        // Delete member from all cards in this board
+        for (let i = 0; i < this.board.cards.length; i++){
+            Utils.toggleInArray(user._id, this.board.cards[i].idMembers);
+        }
+
+        // Delete member from member selection in this board
         this.board.members = this.board.members.filter(item => item.id !== user._id);
+
         this.scrumboardService.updateBoard();
     }
 
