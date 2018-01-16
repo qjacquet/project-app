@@ -43,6 +43,7 @@
                 <img [src]=" member.avatar" class="avatar" />
                 <p fxFlex class="title">{{member.firstName}} {{member.lastName}}</p>
                 <mat-icon *ngIf="!member.owner" class="s-18" matRipple (click)="$event.stopPropagation();deleteMember(member)">delete</mat-icon>
+                <mat-icon *ngIf="member.owner" class="s-18">star</mat-icon>
             </div>
         </div>
     </div>
