@@ -191,7 +191,8 @@ export class ScrumboardService implements Resolve<any>
         });
     }
 
-    setNewBoard(board){
+    setNewBoard(board)
+    {
         board.members = [this.getMemberFormat(this.currentUser, true)]
     }
 
