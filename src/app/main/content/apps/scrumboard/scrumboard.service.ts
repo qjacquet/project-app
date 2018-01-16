@@ -25,7 +25,6 @@ export class ScrumboardService implements Resolve<any>
         private authService: AuthService
     )
     {
-        this.currentUser = this.authService.getCurrentUser();
     }
 
     /**
@@ -37,7 +36,7 @@ export class ScrumboardService implements Resolve<any>
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any
     {
         this.routeParams = route.params;
-
+        this.currentUser = this.authService.getCurrentUser();
         return new Promise((resolve, reject) => {
             Promise.all([
                 this.getBoards()
