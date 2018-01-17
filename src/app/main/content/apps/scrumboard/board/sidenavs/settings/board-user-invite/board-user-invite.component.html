@@ -17,7 +17,10 @@
         <div *ngIf="userSearch.value.length >= 3">
             <div class="nav-link" *ngFor="let user of users | search:'firstName,lastName':query">
                 <img [src]=" user.avatar" class="avatar" />
-                <p fxFlex class="title">{{user.firstName}} {{user.lastName}}</p>
+                <p fxFlex class="title">
+                    {{user.firstName}} {{user.lastName}}
+                </p>
+                <p fxFlex *ngIf="isInArray(user._id, board.members)" class="hint-text">User already added</p>
                 <mat-icon *ngIf="!isInArray(user._id, board.members)" 
                     class="s-18" matRipple (click)="$event.stopPropagation();addMember(user)">person_add</mat-icon>
             </div>

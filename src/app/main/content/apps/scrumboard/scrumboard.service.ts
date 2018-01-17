@@ -7,11 +7,14 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { AuthService } from '../../../../core/services/auth.service';
 import { User } from '../../../../core/models/user';
 import { Utils } from '../../../../core/utils';
+import { Board } from './board.model';
 
 @Injectable()
 export class ScrumboardService implements Resolve<any>
 {
     boards: any[];
+    joinedBoards: Board[];
+    ownedBoards: Board[];
     routeParams: any;
     board: any;
     currentUser : User;
