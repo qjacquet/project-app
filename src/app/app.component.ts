@@ -18,9 +18,10 @@ export class AppComponent
         this.translate.addLangs(['en', 'fr']);
 
         // Set the default language
-        this.translate.setDefaultLang('en');
+        this.translate.setDefaultLang('fr');
 
         // Use a language
-        this.translate.use('en');
+        let browserLang = translate.getBrowserLang();
+        this.translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
     }
 }

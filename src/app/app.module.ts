@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule, RequestOptions, XHRBackend } from '@angular/http';
 import { HttpService } from './core/services/http.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
@@ -17,7 +17,8 @@ import { SplashScreenService } from './core/services/splash-screen.service';
 import { ConfigService } from './core/services/config.service';
 import { NavigationService } from './core/components/navigation/navigation.service';
 import { MarkdownModule } from 'angular2-markdown';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import { AuthGuard, OnlyLoggedInUsersGuard } from './core/services/auth-guard.service';
 import { AuthService } from './core/services/auth.service';
 import { JwtHelper } from 'angular2-jwt';
@@ -45,6 +46,11 @@ const appRoutes: Routes = [
     }
 ];
 
+// AoT requires an exported function for factories
+export function HttpLoaderFactory(httpClient: HttpClient) {
+    return new TranslateHttpLoader(httpClient, "/assets/i18n/", ".json");
+}
+
 @NgModule({
     declarations: [
         AppComponent
@@ -57,7 +63,13 @@ const appRoutes: Routes = [
         RouterModule.forRoot(appRoutes),
         SharedModule,
         MarkdownModule.forRoot(),
-        TranslateModule.forRoot(),
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [HttpClient]
+            }
+        }),
 
         InMemoryWebApiModule.forRoot(FakeDbService, {
             delay             : 0,
