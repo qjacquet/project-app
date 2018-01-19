@@ -14,7 +14,7 @@
                 <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #listMenu="matMenu">
-                <button mat-menu-item (click)="removeList(list.id)">Remove List</button>
+                <button mat-menu-item (click)="removeList(list.id)">{{'ACTION.REMOVE' | translate}}</button>
             </mat-menu>
         </div>
 

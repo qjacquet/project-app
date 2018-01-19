@@ -1,3 +1,55 @@
 {
-    "PROFILE" : "My profile"
+    "ACTION": {
+        "ADD": "Add",
+        "NEW": "New",
+        "EDIT": "Edit",
+        "UPDATE": "Update",
+        "DELETE": "Delete",
+        "REMOVE": "Remove",
+        "SEARCH": "Search"
+    },
+    "STATE": {
+        "ALREADY_ADDED": "Already added"
+    },
+    "TOOLBAR": {
+        "USERMENU": {
+            "PROFILE": "Profile",
+            "INBOX": "Inbox",
+            "LOGOUT": "Logout"
+        }
+    },
+    "APP": {
+        "SCRUMBOARD": {
+            "SCRUMBOARD": "Scrumboard",
+            "BOARD": "Board",
+            "BOARDS": "Boards",
+            "LIST": "List",
+            "CARD": "Card",
+            "CARDS": "Cards",
+            "MEMBER": "Member",
+            "MEMBERS": "Members",
+            "COMMENT": "Comment",
+            "COMMENTS": "Comments",
+            "UNSUBSCRIBE": "Unsubscribe",
+            "SUBSCRIBED": "Subscribed",
+            "SUBSCRIBE": "Subscribe",
+            "BOARD_COLOR": "Board Color",
+            "COVER_IMAGE": "Card Cover Images",
+            "CHECKLIST": "Checklist",
+            "PLACEHOLDER": {
+                "SEARCH_USER": "Search by name or surname",
+                "PICK_DATE": "Choose a date",
+                "ADD_ITEM": "Add an item",
+                "WRITE_COMMENT": "Write a comment..."
+            }
+        }
+    },
+    "COMMON": {
+        "TITLE": "Title",
+        "NAME": "Name",
+        "DESCRIPTION": "Description",
+        "SETTINGS": "Settings",
+        "USER": "User",
+        "MANAGE_USERS": "Manage users"
+    }
 }

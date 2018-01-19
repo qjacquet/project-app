@@ -6,7 +6,7 @@
       class="list-header-name-form" fxFlex="1 0 auto"
       *ngIf="formActive" fxFlex="row">
 
-    <input formControlName="name" #nameInput fxFlex placeholder="Write a list Name">
+    <input formControlName="name" #nameInput fxFlex placeholder="{{'COMMON.TITLE' | translate}}">
 
     <button mat-icon-button fxFlex="0 1 auto">
         <mat-icon>check</mat-icon>

@@ -1,3 +1,55 @@
 {
-    "PROFILE" : "Mon profil"
+    "ACTION": {
+        "ADD": "Ajouter",
+        "NEW": "Nouveau",
+        "EDIT": "Modifier",
+        "UPDATE": "Modifier",
+        "DELETE": "Supprimer",
+        "REMOVE": "Supprimer",
+        "SEARCH": "Rechercher"
+    },
+    "STATE": {
+        "ALREADY_ADDED": "Déjà ajouté"
+    },
+    "TOOLBAR": {
+        "USERMENU": {
+            "PROFILE": "Profil",
+            "INBOX": "Messagerie",
+            "LOGOUT": "Déconnexion"
+        }
+    },
+    "APP": {
+        "SCRUMBOARD": {
+            "SCRUMBOARD": "Scrumboard",
+            "BOARD": "Tableau",
+            "BOARDS": "Tableaux",
+            "LIST": "Liste de tâches",
+            "CARD": "Tâche",
+            "CARDS": "Tâches",
+            "MEMBER": "Membre",
+            "MEMBERS": "Membres",
+            "COMMENT": "Commentaire",
+            "COMMENTS": "Commentaires",
+            "UNSUBSCRIBE": "Ne plus suivre",
+            "SUBSCRIBED": "Suivi",
+            "SUBSCRIBE": "Suivre",
+            "BOARD_COLOR": "Couleur du tableau",
+            "COVER_IMAGE": "Images de couverture",
+            "CHECKLIST": "Checklist",
+            "PLACEHOLDER": {
+                "SEARCH_USER": "Recherche par nom ou prénom",
+                "PICK_DATE": "Sélectionner une date",
+                "ADD_ITEM": "Ajouter une sous-tâche",
+                "WRITE_COMMENT": "Laisser un commentaire..."
+            }
+        }
+    },
+    "COMMON": {
+        "TITLE": "Titre",
+        "NAME": "Nom",
+        "DESCRIPTION": "Description",
+        "SETTINGS": "Paramètres",
+        "USER": "Utilisateur",
+        "MANAGE_USERS": "Gestion des utilisateurs"
+    }
 }

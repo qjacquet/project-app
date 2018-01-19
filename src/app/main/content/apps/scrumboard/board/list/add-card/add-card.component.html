@@ -4,7 +4,7 @@
     <div>
         <mat-icon class="s-20">add</mat-icon>
     </div>
-    <span>Add a card</span>
+    <span>{{'ACTION.ADD' | translate}} {{'APP.SCRUMBOARD.CARD' | translate | lowercase}} </span>
 </div>
 
 <div *ngIf="formActive" class="add-card-form-wrapper">
@@ -12,7 +12,7 @@
     <form [formGroup]="form" (submit)="onFormSubmit()" class="add-card-form" fxLayout="column">
 
         <mat-form-field fxFlex floatPlaceholder="never">
-            <input #nameInput matInput formControlName="name" placeholder="Card title" autocomplete="off" required>
+            <input #nameInput matInput formControlName="name" placeholder="{{'COMMON.TITLE' | translate}}" autocomplete="off" required>
         </mat-form-field>
 
         <div class="pl-8" fxLayout="row" fxLayoutAlign="space-between center">

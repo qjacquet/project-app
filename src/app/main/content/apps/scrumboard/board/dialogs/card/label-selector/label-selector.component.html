@@ -6,7 +6,7 @@
             <div>Labels</div>
             <button mat-button (click)="labelsMenuView ='add'">
                 <mat-icon class="s-16">add</mat-icon>
-                <span>Add</span>
+                <span>{{'ACTION.ADD' | translate}}</span>
             </button>
         </div>
 
@@ -33,12 +33,12 @@
             <button mat-icon-button (click)="labelsMenuView ='labels'">
                 <mat-icon class="s-16">arrow_back</mat-icon>
             </button>
-            <div>Edit Label</div>
+            <div>{{'ACTION.EDIT' | translate}} Label</div>
         </div>
 
         <div class="content" fxLayout="row" fxLayoutAlign="start center">
             <mat-form-field>
-                <input matInput placeholder="Name" [(ngModel)]="selectedLabel.name" (change)="onLabelChange()">
+                <input matInput placeholder="{{'COMMON.TITLE' | translate}}" [(ngModel)]="selectedLabel.name" (change)="onLabelChange()">
             </mat-form-field>
 
             <material-color-picker [(selectedClass)]="selectedLabel.color" class="ml-8" (change)="$event.preventDefault;onLabelChange()"></material-color-picker>
@@ -52,20 +52,20 @@
             <button mat-icon-button (click)="labelsMenuView ='labels'">
                 <mat-icon class="s-16">arrow_back</mat-icon>
             </button>
-            <div>Add Label</div>
+            <div>{{'ACTION.ADD' | translate}} Label</div>
         </div>
 
         <form (submit)="addNewLabel()" #newLabelForm="ngForm" fxFlex fxLayout="column" fxLayoutAlign="start end">
 
             <div fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="space-between center">
                 <mat-form-field fxFlex>
-                    <input matInput placeholder="Name" [(ngModel)]="newLabel.name" name="labelName" required>
+                    <input matInput placeholder="{{'COMMON.TITLE' | translate}}" [(ngModel)]="newLabel.name" name="labelName" required>
                 </mat-form-field>
 
                 <material-color-picker class="ml-8" [(selectedClass)]="newLabel.color" name="labelColor"></material-color-picker>
             </div>
 
-            <button mat-raised-button class="mat-accent mt-16" [disabled]="!newLabelForm.valid">ADD NEW LABEL</button>
+            <button mat-raised-button class="mat-accent mt-16" [disabled]="!newLabelForm.valid">{{'ACTION.ADD' | translate}}</button>
         </form>
     </div>
 </div>

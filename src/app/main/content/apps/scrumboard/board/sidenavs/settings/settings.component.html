@@ -4,7 +4,7 @@
 
         <!-- SIDENAV HEADER -->
         <div class="header mat-accent-bg px-24" [ngClass]="'mat-'+board.settings.color+'-bg'" fxLayout="column" fxLayoutAlign="center center">
-            <div>Settings</div>
+            <div>{{'COMMON.SETTINGS' | translate}}</div>
         </div>
         <!-- / SIDENAV HEADER -->
 
@@ -22,14 +22,14 @@
                 <div class="nav-item">
                     <div class="nav-link" matRipple (click)="view = 'board-color'">
                         <mat-icon class="nav-link-icon">format_color_fill</mat-icon>
-                        <p class="title">Board Color</p>
+                        <p class="title">{{'APP.SCRUMBOARD.BOARD_COLOR' | translate}}</p>
                     </div>
                 </div>
 
                 <div class="nav-item">
                     <div class="nav-link" matRipple (click)="toggleCardCover()">
                         <mat-icon class="nav-link-icon">photo</mat-icon>
-                        <p fxFlex class="title">Card Cover Images</p>
+                        <p fxFlex class="title">{{'APP.SCRUMBOARD.COVER_IMAGE' | translate}}</p>
                         <mat-icon *ngIf="board.settings.cardCoverImages" class="s-18">check</mat-icon>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
                 <div class="nav-item">
                     <div class="nav-link" matRipple (click)="toggleSubcription()">
                         <mat-icon class="nav-link-icon">remove_red_eye</mat-icon>
-                        <p fxFlex class="title">Subscribe</p>
+                        <p fxFlex class="title">{{'APP.SCRUMBOARD.SUBSCRIBED' | translate}}</p>
                         <mat-icon *ngIf="board.settings.subscribed" class="s-18">check</mat-icon>
                     </div>
                 </div>
@@ -51,14 +51,14 @@
                 <div class="nav-item">
                     <div class="nav-link" matRipple (click)="view = 'board-user-invite'">
                         <mat-icon class="nav-link-icon">group</mat-icon>
-                        <p class="title">Members</p>
+                        <p class="title">{{'APP.SCRUMBOARD.MEMBERS' | translate}}</p>
                     </div>
                 </div>
 
                 <div class="nav-item">
                     <div class="nav-link" matRipple (click)="deleteBoard()">
                         <mat-icon class="nav-link-icon">delete</mat-icon>
-                        <p class="title">Delete Board</p>
+                        <p class="title">{{'ACTION.DELETE' | translate}}</p>
                     </div>
                 </div>
 
@@ -73,7 +73,7 @@
 
         <!-- SIDENAV HEADER -->
         <div class="header mat-accent-bg px-24" [ngClass]="'mat-'+board.settings.color+'-bg'" fxLayout="row" fxLayoutAlign="space-between center">
-            <div>Background Color</div>
+            <div>{{'APP.SCRUMBOARD.BOARD_COLOR' | translate}}</div>
             <button mat-icon-button (click)="view ='main'">
                 <mat-icon class="s-16">arrow_back</mat-icon>
             </button>
@@ -93,7 +93,7 @@
     
         <!-- SIDENAV HEADER -->
         <div class="header mat-accent-bg px-24" [ngClass]="'mat-'+board.settings.color+'-bg'" fxLayout="row" fxLayoutAlign="space-between center">
-            <div>Manage Users</div>
+            <div>{{'COMMON.MANAGE_USERS' | translate}}</div>
             <button mat-icon-button (click)="view ='main'">
                 <mat-icon class="s-16">arrow_back</mat-icon>
             </button>
