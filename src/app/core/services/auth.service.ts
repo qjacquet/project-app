@@ -17,8 +17,7 @@ export class AuthService implements Resolve<any>
     constructor(
         private http: HttpClient,
         private router: Router,
-    )
-    {
+    ) {
     }
 
     /**
@@ -27,8 +26,7 @@ export class AuthService implements Resolve<any>
      * @param {RouterStateSnapshot} state
      * @returns {Observable<any> | Promise<any> | any}
      */
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any
-    {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
         this.routeParams = route.params;
 
         return new Promise((resolve, reject) => {
@@ -38,7 +36,7 @@ export class AuthService implements Resolve<any>
                     resolve();
                 },
                 reject
-            );
+                );
         });
     }
 
@@ -46,8 +44,7 @@ export class AuthService implements Resolve<any>
      * Call auth method
      * @param userForm 
      */
-    signin(userForm) : Observable<any>
-    {
+    signin(userForm): Observable<any> {
         return this.http.post(Utils.getApiUri('/auth'), userForm);
     }
 
@@ -55,8 +52,7 @@ export class AuthService implements Resolve<any>
      * Call register method
      * @param userForm 
      */
-    register(userForm) : Observable<any>
-    {
+    register(userForm): Observable<any> {
         return this.http.post(Utils.getApiUri('/register'), userForm);
     }
 
@@ -64,8 +60,7 @@ export class AuthService implements Resolve<any>
      * Helper methods 
      */
 
-    logout(redirect?: boolean)
-    {
+    logout(redirect?: boolean) {
         this.removeToken();
 
         if (redirect) {
@@ -73,42 +68,39 @@ export class AuthService implements Resolve<any>
         }
     }
 
-    isLogged()
-    {
-        if (this.getToken()){
+    isLogged() {
+        if (this.getToken()) {
             return true;
         }
         return false;
     }
 
-    isAdmin()
-    {
+    isAdmin() {
         var user = this.getCurrentUser();
 
         if (user.admin)
             return true;
-        
+
         return false;
     }
 
-    setToken(token){
+    setToken(token) {
         localStorage.setItem('token', token);
     }
 
-    getToken(){
+    getToken() {
         return localStorage.getItem('token');
     }
 
-    removeToken(){
+    removeToken() {
         localStorage.removeItem('token');
     }
 
-    getCurrentUser(): User
-    {
+    getCurrentUser(): User {
         var user = new User();
         var token = this.getToken();
 
-        if (token){
+        if (token) {
             var jwtHelper = new JwtHelper();
             user = jwtHelper.decodeToken(token);
         }
