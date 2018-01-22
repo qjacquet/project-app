@@ -33,6 +33,13 @@ export class NavigationModel
                         'url'  : '/apps/scrumboard'
                     },
                     {
+                        'id'   : 'chat',
+                        'title': 'Chat',
+                        'type' : 'item',
+                        'icon' : 'assessment',
+                        'url'  : '/apps/chat'
+                    },
+                    {
                         'id'   : 'file-manager',
                         'title': 'File Manager',
                         'type' : 'item',

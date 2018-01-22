@@ -30,6 +30,11 @@ const appRoutes: Routes = [
         canActivate: [OnlyLoggedInUsersGuard, AuthGuard]
     },
     {
+        path        : 'apps/chat',
+        loadChildren: './main/content/apps/chat/chat.module#ChatModule',
+        canActivate: [OnlyLoggedInUsersGuard, AuthGuard]
+    },
+    {
         path        : 'apps/file-manager',
         loadChildren: './main/content/apps/file-manager/file-manager.module#FileManagerModule',
         canActivate: [OnlyLoggedInUsersGuard, AuthGuard]
