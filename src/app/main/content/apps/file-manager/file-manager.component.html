@@ -3,8 +3,7 @@
     <mat-sidenav-container>
 
         <!-- SIDENAV -->
-        <mat-sidenav class="sidenav left-sidenav" align="start" opened="false" mode="over"
-                     MatSidenavHelper="file-manager-left-sidenav">
+        <mat-sidenav class="sidenav left-sidenav" align="start" opened="false" mode="over" MatSidenavHelper="file-manager-left-sidenav">
             <file-manager-main-sidenav></file-manager-main-sidenav>
         </mat-sidenav>
         <!-- / SIDENAV -->
@@ -19,8 +18,7 @@
                 <div class="toolbar w-100-p" fxFlex fxLayout="row" fxLayoutAlign="space-between start">
 
                     <div class="left-side" fxLayout="row">
-                        <button mat-icon-button class="sidenav-toggle"
-                                MatSidenavToggler="file-manager-left-sidenav">
+                        <button mat-icon-button class="sidenav-toggle" MatSidenavToggler="file-manager-left-sidenav">
                             <mat-icon>menu</mat-icon>
                         </button>
                     </div>
@@ -34,8 +32,7 @@
                 <!-- / TOOLBAR -->
 
                 <!-- BREADCRUMB -->
-                <div class="breadcrumb text-truncate h1 pl-72" fxLayout="row" fxLayoutAlign="start center"
-                     *IfOnDom [@animate]="{value:'*',params:{x:'50px'}}">
+                <div class="breadcrumb text-truncate h1 pl-72" fxLayout="row" fxLayoutAlign="start center" *IfOnDom [@animate]="{value:'*',params:{x:'50px'}}">
                     <div *ngFor="let path of pathArr; last  as isLast" fxLayout="row" fxLayoutAlign="start center">
                         <span>{{path}}</span>
                         <mat-icon *ngIf="!isLast" class="separator">chevron_right</mat-icon>
@@ -46,11 +43,10 @@
                 <!-- ADD FILE BUTTON -->
                 <div class="file-uploader">
                     <input hidden type="file" #fileInput/>
-                    <button mat-fab
-                            class="add-file-button mat-warn"
-                            (click)="fileInput.click()"
-                            aria-label="Add file"
-                            *IfOnDom [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
+                    <button mat-fab class="add-file-button mat-warn" (click)="fileInput.click()" aria-label="Add file" *IfOnDom [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
+                        <mat-icon>add</mat-icon>
+                    </button>
+                    <button mat-fab class="add-file-button mat-warn" (click)="fileInput.click()" aria-label="Add file" *IfOnDom [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
                         <mat-icon>add</mat-icon>
                     </button>
                 </div>
@@ -65,15 +61,14 @@
             </div>
             <!-- / CONTENT -->
 
+            <!-- SIDENAV -->
+            <mat-sidenav class="sidenav right-sidenav mat-sidenav-opened" align="end" opened="true" mode="side" MatSidenavHelper="file-manager-right-sidenav"
+                mat-is-locked-open="gt-md">
+                <file-manager-details-sidenav *ngIf="files"></file-manager-details-sidenav>
+            </mat-sidenav>
+            <!-- / SIDENAV -->
+
         </div>
         <!-- / CENTER -->
-
-        <!-- SIDENAV -->
-        <mat-sidenav class="sidenav right-sidenav mat-sidenav-opened" align="end" opened="true" mode="side"
-                     MatSidenavHelper="file-manager-right-sidenav" mat-is-locked-open="gt-md">
-            <file-manager-details-sidenav></file-manager-details-sidenav>
-        </mat-sidenav>
-        <!-- / SIDENAV -->
-
     </mat-sidenav-container>
 </div>

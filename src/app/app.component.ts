@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { SplashScreenService } from './core/services/splash-screen.service';
 import { TranslateService } from '@ngx-translate/core';
+import { Utils } from './core/utils';
 
 @Component({
     selector   : 'root',
@@ -18,10 +19,10 @@ export class AppComponent
         this.translate.addLangs(['en', 'fr']);
 
         // Set the default language
-        this.translate.setDefaultLang('fr');
+        this.translate.setDefaultLang('en');
 
         // Use a language
-        let browserLang = translate.getBrowserLang();
+        let browserLang = Utils.getLanguage();
         this.translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
     }
 }

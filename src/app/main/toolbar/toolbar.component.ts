@@ -70,7 +70,7 @@ export class ToolbarComponent
             }
         ];
 
-        this.selectedLanguage = this.languages[0];
+        this.selectedLanguage = this.getLanguageOrDefault();
 
         router.events.subscribe(
             (event) => {
@@ -97,13 +97,21 @@ export class ToolbarComponent
         console.log(value);
     }
 
+    getLanguageOrDefault(){
+        return this.languages.filter(item => item.id == Utils.getLanguage())[0] || this.languages();
+    }
+
     setLanguage(lang)
     {
+        console.log(lang);
         // Set the selected language for toolbar
         this.selectedLanguage = lang;
 
         // Use the selected language for translations
         this.translate.use(lang.id);
+
+        // Store in localstorage
+        Utils.setLanguage(lang.id);
     }
 
     profile()

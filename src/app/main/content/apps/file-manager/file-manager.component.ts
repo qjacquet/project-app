@@ -22,8 +22,8 @@ export class FileManagerComponent implements OnInit
     ngOnInit()
     {
         this.fileManagerService.onFileSelected.subscribe(selected => {
-            this.selected = selected;
-            this.pathArr = selected.location.split('>');
+            // this.selected = selected;
+            // this.pathArr = selected.location.split('>');
         });
     }
 

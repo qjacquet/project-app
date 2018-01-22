@@ -117,4 +117,12 @@ export class Utils
     public static getApiUri(methodToCall){
         return environment.server + methodToCall;
     }
+
+    public static setLanguage(langId) {
+        localStorage.setItem('language', langId);
+    }
+
+    public static getLanguage() {
+        return localStorage.getItem('language') ||'en';
+    }
 }
