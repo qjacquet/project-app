@@ -3,6 +3,7 @@ import { ChatService } from '../../../chat.service';
 import { ObservableMedia } from '@angular/flex-layout';
 import { Animations } from '../../../../../../../core/animations';
 import { MatSidenavHelperService } from '../../../../../../../core/directives/mat-sidenav-helper/mat-sidenav-helper.service';
+import { User, UserStatus } from '../../../../../../../core/models/user';
 
 @Component({
     selector   : 'chat-chats-sidenav',
@@ -12,6 +13,7 @@ import { MatSidenavHelperService } from '../../../../../../../core/directives/ma
 })
 export class ChatChatsSidenavComponent implements OnInit
 {
+    UserStatus = UserStatus;
     user: any;
     chats: any[];
     contacts: any[];

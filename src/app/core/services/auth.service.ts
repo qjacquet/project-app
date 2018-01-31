@@ -16,7 +16,7 @@ export class AuthService implements Resolve<any>
 
     constructor(
         private http: HttpClient,
-        private router: Router,
+        private router: Router
     ) {
     }
 
@@ -56,13 +56,13 @@ export class AuthService implements Resolve<any>
         return this.http.post(Utils.getApiUri('/register'), userForm);
     }
 
-    /** 
-     * Helper methods 
-     */
     logout(redirect?: boolean) {
         var user = this.getCurrentUser();
         user.status = UserStatus.OFFLINE;
-        this.http.put(Utils.getApiUri('/logout'), user);
+        this.http.post(Utils.getApiUri('/logout'), user)
+            .subscribe(response => {
+                console.log(response);
+            });
 
         this.removeToken();
 
@@ -109,12 +109,5 @@ export class AuthService implements Resolve<any>
         }
 
         return user;
-    }
-
-    updateCurrentUserStatus(status: UserStatus) {
-        var user = this.getCurrentUser();
-        user.status = status.valueOf();
-        console.log(user);
-        return this.http.put(Utils.getApiUri('/users/') + user.id, user)
     }
 }

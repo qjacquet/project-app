@@ -6,6 +6,7 @@ import { HtmlToPlaintextPipe } from './htmlToPlaintext.pipe';
 import { FilterPipe } from './filter.pipe';
 import { CamelCaseToDashPipe } from './camelCaseToDash.pipe';
 import { SearchPipe } from './search.pipe';
+import { CapitalizeFirstPipe } from './capitalizeFirst.pipe';
 
 @NgModule({
     declarations: [
@@ -14,8 +15,8 @@ import { SearchPipe } from './search.pipe';
         HtmlToPlaintextPipe,
         FilterPipe,
         CamelCaseToDashPipe,
-        SearchPipe
-
+        SearchPipe,
+        CapitalizeFirstPipe
     ],
     imports     : [],
     exports     : [
@@ -24,7 +25,8 @@ import { SearchPipe } from './search.pipe';
         HtmlToPlaintextPipe,
         FilterPipe,
         CamelCaseToDashPipe,
-        SearchPipe
+        SearchPipe,
+        CapitalizeFirstPipe
     ]
 })
 

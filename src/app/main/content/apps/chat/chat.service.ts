@@ -6,7 +6,8 @@ import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Utils } from '../../../../core/utils';
 import { AuthService } from '../../../../core/services/auth.service';
-import { User } from '../../../../core/models/user';
+import { UserService } from '../../../../core/services/user.service';
+import { User, UserStatus } from '../../../../core/models/user';
 
 @Injectable()
 export class ChatService implements Resolve<any>
@@ -23,10 +24,9 @@ export class ChatService implements Resolve<any>
 
     constructor(
         private http: HttpService,
-        private authService: AuthService
-    )
-    {
-        this.user = authService.getCurrentUser();
+        private authService: AuthService,
+        private userService: UserService
+    ) {
     }
 
     /**
@@ -34,15 +34,13 @@ export class ChatService implements Resolve<any>
      * @param contactId
      * @returns {Promise<any>}
      */
-    getChat(contactId)
-    {
+    getChat(contactId) {
 
         const chatItem = this.chats.filter(item => item.members.id === contactId)[0];
 
         console.log(chatItem);
 
-        if (!chatItem)
-        {
+        if (!chatItem) {
             this.createNewChat(contactId).then((newChats) => {
                 this.getChat(contactId);
             });
@@ -95,8 +93,7 @@ export class ChatService implements Resolve<any>
      * @param contactId
      * @returns {Promise<any>}
      */
-    createNewChat(contactId)
-    {
+    createNewChat(contactId) {
         return new Promise((resolve, reject) => {
 
             const contact = this.contacts.filter(item => item._id === contactId)[0];
@@ -104,8 +101,8 @@ export class ChatService implements Resolve<any>
             const chatId = Utils.generateGUID();
 
             const chat = {
-                id    : chatId,
-                members : [],
+                id: chatId,
+                members: [],
                 dialog: []
             };
 
@@ -130,7 +127,7 @@ export class ChatService implements Resolve<any>
             /**
              * Post the created chat
              */
-            this.http.post(Utils.getApiUri('/chats/'), {...chat})
+            this.http.post(Utils.getApiUri('/chats/'), { ...chat })
                 .subscribe((response: any) => {
                 }, reject);
         });
@@ -140,8 +137,7 @@ export class ChatService implements Resolve<any>
      * Select Contact
      * @param contact
      */
-    selectContact(contact)
-    {
+    selectContact(contact) {
         this.onContactSelected.next(contact);
     }
 
@@ -149,22 +145,21 @@ export class ChatService implements Resolve<any>
      * Set user status
      * @param status
      */
-    setUserStatus(status)
-    {
-        this.user.status = status;
+    setUserStatus(status) {
+        this.userService.changeCurrentUserStatus(status).then((data) => {
+            this.user = data;
+        });
     }
 
     /**
      * Update user data
      * @param userData
      */
-    updateUserData(userData)
-    {
+    updateUserData(userData) {
         this.http.post('api/chat-user/' + this.user.id, userData)
             .subscribe((response: any) => {
-                    this.user = userData;
-                }
-            );
+                this.user = userData;
+            });
     }
 
     /**
@@ -173,12 +168,11 @@ export class ChatService implements Resolve<any>
      * @param dialog
      * @returns {Promise<any>}
      */
-    updateDialog(chatId, dialog): Promise<any>
-    {
+    updateDialog(chatId, dialog): Promise<any> {
         return new Promise((resolve, reject) => {
 
             const newData = {
-                id    : chatId,
+                id: chatId,
                 dialog: dialog
             };
 
@@ -195,20 +189,21 @@ export class ChatService implements Resolve<any>
      * @param {RouterStateSnapshot} state
      * @returns {Observable<any> | Promise<any> | any}
      */
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any
-    {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
         return new Promise((resolve, reject) => {
             Promise.all([
                 this.getContacts(),
-                this.getChats()
+                this.getChats(),
+                this.getUser()
             ]).then(
-                ([contacts, chats]) => {
+                ([contacts, chats, user]) => {
                     this.contacts = contacts;
                     this.chats = chats;
+                    this.user = user;
                     resolve();
                 },
                 reject
-            );
+                );
         });
     }
 
@@ -216,8 +211,7 @@ export class ChatService implements Resolve<any>
      * Get Contacts
      * @returns {Promise<any>}
      */
-    getContacts(): Promise<any>
-    {
+    getContacts(): Promise<any> {
         return new Promise((resolve, reject) => {
             this.http.get(Utils.getApiUri('/users/'))
                 .subscribe((response: any) => {
@@ -232,10 +226,22 @@ export class ChatService implements Resolve<any>
      * Get Chats
      * @returns {Promise<any>}
      */
-    getChats(): Promise<any>
-    {
+    getChats(): Promise<any> {
         return new Promise((resolve, reject) => {
             this.http.get(Utils.getApiUri('/chats/'))
+                .subscribe((response: any) => {
+                    resolve(response);
+                }, reject);
+        });
+    }
+
+    /**
+     * Get User
+     * @returns {Promise<any>}
+     */
+    getUser(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.http.get(Utils.getApiUri('/users/') + this.authService.getCurrentUser().id)
                 .subscribe((response: any) => {
                     resolve(response);
                 }, reject);

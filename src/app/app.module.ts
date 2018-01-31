@@ -18,34 +18,35 @@ import { ConfigService } from './core/services/config.service';
 import { NavigationService } from './core/components/navigation/navigation.service';
 import { MarkdownModule } from 'angular2-markdown';
 import { TranslateModule, TranslateLoader } from "@ngx-translate/core";
-import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { AuthGuard, OnlyLoggedInUsersGuard } from './core/services/auth-guard.service';
 import { AuthService } from './core/services/auth.service';
+import { UserService } from './core/services/user.service';
 import { JwtHelper } from 'angular2-jwt';
 
 const appRoutes: Routes = [
     {
-        path        : 'apps/scrumboard',
+        path: 'apps/scrumboard',
         loadChildren: './main/content/apps/scrumboard/scrumboard.module#ScrumboardModule',
         canActivate: [OnlyLoggedInUsersGuard, AuthGuard]
     },
     {
-        path        : 'apps/chat',
+        path: 'apps/chat',
         loadChildren: './main/content/apps/chat/chat.module#ChatModule',
         canActivate: [OnlyLoggedInUsersGuard, AuthGuard]
     },
     {
-        path        : 'apps/file-manager',
+        path: 'apps/file-manager',
         loadChildren: './main/content/apps/file-manager/file-manager.module#FileManagerModule',
         canActivate: [OnlyLoggedInUsersGuard, AuthGuard]
     },
     {
-        path        : 'apps/dashboards/project',
+        path: 'apps/dashboards/project',
         loadChildren: './main/content/apps/dashboards/project/project.module#ProjectModule',
         canActivate: [OnlyLoggedInUsersGuard, AuthGuard]
     },
     {
-        path      : '**',
+        path: '**',
         redirectTo: 'apps/dashboards/project',
         canActivate: [OnlyLoggedInUsersGuard, AuthGuard]
     }
@@ -60,7 +61,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     declarations: [
         AppComponent
     ],
-    imports     : [
+    imports: [
         BrowserModule,
         HttpModule,
         HttpClientModule,
@@ -77,7 +78,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         }),
 
         InMemoryWebApiModule.forRoot(FakeDbService, {
-            delay             : 0,
+            delay: 0,
             passThruUnknownUrl: true
         }),
 
@@ -87,12 +88,12 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 
         ProjectModule
     ],
-    providers   : [
+    providers: [
         /** HTTP Custom */
         {
             provide: HttpService,
             useFactory: (backend: XHRBackend, options: RequestOptions, authService: AuthService) => {
-              return new HttpService(backend, options, authService);
+                return new HttpService(backend, options, authService);
             },
             deps: [XHRBackend, RequestOptions, AuthService]
         },
@@ -101,12 +102,12 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         NavigationService,
         AuthGuard,
         OnlyLoggedInUsersGuard,
-        JwtHelper
+        JwtHelper,
+        UserService
     ],
-    bootstrap   : [
+    bootstrap: [
         AppComponent
     ]
 })
-export class AppModule
-{
+export class AppModule {
 }

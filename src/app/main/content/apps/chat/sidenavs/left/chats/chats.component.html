@@ -16,34 +16,27 @@
                      alt="{{user.name}}"/>
                 <!-- / USER AVATAR -->
 
-                <mat-icon class="s-16 status" [ngClass]="user.status"
+                <mat-icon class="s-16 status" [ngClass]="(UserStatus[user.status]).toLowerCase()"
                           [matMenuTriggerFor]="userStatusMenu"></mat-icon>
 
                 <!-- USER STATUS -->
                 <mat-menu id="user-status-menu" #userStatusMenu="matMenu">
 
-                    <button mat-menu-item (click)="setUserStatus('online')">
+                    <button mat-menu-item (click)="setUserStatus(1)">
                         <div fxLayout="row" fxLayoutAlign="start center">
                             <mat-icon class="s-16 status online"></mat-icon>
                             <span>Online</span>
                         </div>
                     </button>
 
-                    <button mat-menu-item (click)="setUserStatus('away')">
+                    <button mat-menu-item (click)="setUserStatus(2)">
                         <div fxLayout="row" fxLayoutAlign="start center">
                             <mat-icon class="s-16 status away"></mat-icon>
                             <span>Away</span>
                         </div>
                     </button>
 
-                    <button mat-menu-item (click)="setUserStatus('do-not-disturb')">
-                        <div fxLayout="row" fxLayoutAlign="start center">
-                            <mat-icon class="s-16 status do-not-disturb"></mat-icon>
-                            <span>Do not disturb</span>
-                        </div>
-                    </button>
-
-                    <button mat-menu-item (click)="setUserStatus('offline')">
+                    <button mat-menu-item (click)="setUserStatus(0)">
                         <div fxLayout="row" fxLayoutAlign="start center">
                             <mat-icon class="s-16 status offline"></mat-icon>
                             <span>Offline</span>
@@ -160,12 +153,12 @@
                 <div fxLayout="row" fxLayoutAlign="start center">
                     <div class="avatar-wrapper" fxFlex="0 1 auto">
                         <img src="{{contact.avatar}}" class="mat-avatar avatar"/>
-                        <mat-icon class="s-16 status" [ngClass]="contact.status"></mat-icon>
+                        <mat-icon class="s-16 status" [ngClass]="UserStatus[contact.status]"></mat-icon>
                     </div>
 
                     <div class="" fxLayout="column" fxLayoutAlign="center start">
                         <div class="contact-name">{{contact.firstName}} {{contact.lastName}}</div>
-                        <p class="contact-mood">{{contact.status}}</p>
+                        <p class="contact-mood">{{UserStatus[contact.status] | capitalizeFirst}}</p>
                     </div>
                 </div>
             </button>

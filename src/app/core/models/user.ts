@@ -20,5 +20,5 @@ export enum UserStatus
 {
     OFFLINE,
     ONLINE,
-    AFK
+    AWAY
 }
