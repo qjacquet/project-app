@@ -7,4 +7,5 @@ export class User {
     lastName: string;
     avatar: string;
     admin: boolean;
+    status: string;
 }

@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { HttpClient } from '@angular/common/http';
+import { HttpService } from '../../../../core/services/http.service';
 import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Utils } from '../../../../core/utils';
+import { AuthService } from '../../../../core/services/auth.service';
+import { User } from '../../../../core/models/user';
 
 @Injectable()
 export class ChatService implements Resolve<any>
 {
-    contacts: any[];
+    contacts: User[];
     chats: any[];
-    user: any;
+    user: User;
     onChatSelected = new BehaviorSubject<any>(null);
     onContactSelected = new BehaviorSubject<any>(null);
     onChatsUpdated = new Subject<any>();
@@ -19,8 +21,12 @@ export class ChatService implements Resolve<any>
     onLeftSidenavViewChanged = new Subject<any>();
     onRightSidenavViewChanged = new Subject<any>();
 
-    constructor(private http: HttpClient)
+    constructor(
+        private http: HttpService,
+        private authService: AuthService
+    )
     {
+        this.user = authService.getCurrentUser();
     }
 
     /**
@@ -30,14 +36,12 @@ export class ChatService implements Resolve<any>
      */
     getChat(contactId)
     {
-        const chatItem = this.user.chatList.find((item) => {
-            return item.contactId === contactId;
-        });
 
-        /**
-         * Create new chat, if it's not created yet.
-         */
-        if ( !chatItem )
+        const chatItem = this.chats.filter(item => item.members.id == contactId)[0];
+
+        console.log(chatItem);
+
+        if (!chatItem)
         {
             this.createNewChat(contactId).then((newChats) => {
                 this.getChat(contactId);
@@ -45,27 +49,45 @@ export class ChatService implements Resolve<any>
             return;
         }
 
-        return new Promise((resolve, reject) => {
-            this.http.get('api/chat-chats/' + chatItem.id)
-                .subscribe((response: any) => {
-                    const chat = response;
+        this.onChatSelected.next(
+            this.chats.filter(item => item.members.id == contactId)[0]);
 
-                    const chatContact = this.contacts.find((contact) => {
-                        return contact.id === contactId;
-                    });
 
-                    const chatData = {
-                        chatId : chat.id,
-                        dialog : chat.dialog,
-                        contact: chatContact
-                    };
+        // const chatItem = this.chats.find((item) => {
+        //     return item.members.id === contactId;
+        // });
 
-                    this.onChatSelected.next({...chatData});
+        /**
+         * Create new chat, if it's not created yet.
+         */
+        // if ( !chatItem )
+        // {
+        //     this.createNewChat(contactId).then((newChats) => {
+        //         this.getChat(contactId);
+        //     });
+        //     return;
+        // }
 
-                }, reject);
+        // return new Promise((resolve, reject) => {
+        //     this.http.get(Utils.getApiUri('/chats/' + chatItem.id))
+        //         .subscribe((response: any) => {
+        //             const chat = response;
 
-        });
+        //             const chatContact = this.contacts.find((contact) => {
+        //                 return contact.id === contactId;
+        //             });
 
+        //             const chatData = {
+        //                 chatId : chat.id,
+        //                 dialog : chat.dialog,
+        //                 contact: chatContact
+        //             };
+
+        //             this.onChatSelected.next({...chatData});
+
+        //         }, reject);
+
+        // });
     }
 
     /**
@@ -77,50 +99,37 @@ export class ChatService implements Resolve<any>
     {
         return new Promise((resolve, reject) => {
 
-            const contact = this.contacts.find((item) => {
-                return item.id === contactId;
-            });
+            const contact = this.contacts.filter(item => item._id == contactId)[0];
 
             const chatId = Utils.generateGUID();
 
             const chat = {
                 id    : chatId,
+                members : [],
                 dialog: []
             };
 
-            const chatListItem = {
-                contactId      : contactId,
-                id             : chatId,
-                lastMessageTime: '2017-02-18T10:30:18.931Z',
-                name           : contact.name,
-                unread         : null
-            };
+            chat.members.push(
+                {
+                    id: this.user.id,
+                    firstName: this.user.firstName,
+                    lastName: this.user.lastName,
+                    avatar: this.user.avatar
+                },
+                {
+                    id: contact._id,
+                    firstName: contact.firstName,
+                    lastName: contact.lastName,
+                    avatar: contact.avatar
+                }
+            );
 
-            /**
-             * Add new chat list item to the user's chat list
-             */
-            this.user.chatList.push(chatListItem);
 
             /**
              * Post the created chat
              */
-            this.http.post('api/chat-chats', {...chat})
+            this.http.post(Utils.getApiUri('/chats/'), {...chat})
                 .subscribe((response: any) => {
-
-                    /**
-                     * Post the new the user data
-                     */
-                    this.http.post('api/chat-user/' + this.user.id, this.user)
-                        .subscribe(newUserData => {
-
-                            /**
-                             * Update the user data from server
-                             */
-                            this.getUser().then(updatedUser => {
-                                this.onUserUpdated.next(updatedUser);
-                                resolve(updatedUser);
-                            });
-                        });
                 }, reject);
         });
     }
@@ -189,13 +198,11 @@ export class ChatService implements Resolve<any>
         return new Promise((resolve, reject) => {
             Promise.all([
                 this.getContacts(),
-                this.getChats(),
-                this.getUser()
+                this.getChats()
             ]).then(
-                ([contacts, chats, user]) => {
+                ([contacts, chats]) => {
                     this.contacts = contacts;
                     this.chats = chats;
-                    this.user = user;
                     resolve();
                 },
                 reject
@@ -210,9 +217,11 @@ export class ChatService implements Resolve<any>
     getContacts(): Promise<any>
     {
         return new Promise((resolve, reject) => {
-            this.http.get('api/chat-contacts')
+            this.http.get(Utils.getApiUri('/users/'))
                 .subscribe((response: any) => {
-                    resolve(response);
+                    resolve(<User[]>response
+                        .filter(item => item._id != this.authService
+                            .getCurrentUser().id));
                 }, reject);
         });
     }
@@ -224,23 +233,9 @@ export class ChatService implements Resolve<any>
     getChats(): Promise<any>
     {
         return new Promise((resolve, reject) => {
-            this.http.get('api/chat-chats')
+            this.http.get(Utils.getApiUri('/chats/'))
                 .subscribe((response: any) => {
                     resolve(response);
-                }, reject);
-        });
-    }
-
-    /**
-     * Get User
-     * @returns {Promise<any>}
-     */
-    getUser(): Promise<any>
-    {
-        return new Promise((resolve, reject) => {
-            this.http.get('api/chat-user')
-                .subscribe((response: any) => {
-                    resolve(response[0]);
                 }, reject);
         });
     }
