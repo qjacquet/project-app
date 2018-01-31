@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Utils } from '../utils';
-import { User } from '../models/user';
+import { User, UserStatus } from '../models/user';
 import { JwtHelper } from 'angular2-jwt';
 import 'rxjs/add/operator/map';
 
@@ -59,8 +59,11 @@ export class AuthService implements Resolve<any>
     /** 
      * Helper methods 
      */
-
     logout(redirect?: boolean) {
+        var user = this.getCurrentUser();
+        user.status = UserStatus.OFFLINE;
+        this.http.put(Utils.getApiUri('/logout'), user);
+
         this.removeToken();
 
         if (redirect) {
@@ -106,5 +109,12 @@ export class AuthService implements Resolve<any>
         }
 
         return user;
+    }
+
+    updateCurrentUserStatus(status: UserStatus) {
+        var user = this.getCurrentUser();
+        user.status = status.valueOf();
+        console.log(user);
+        return this.http.put(Utils.getApiUri('/users/') + user.id, user)
     }
 }

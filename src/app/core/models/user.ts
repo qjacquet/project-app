@@ -1,4 +1,5 @@
-export class User {
+export class User 
+{
     _id: number;
     id: number;
     username: string;
@@ -7,5 +8,17 @@ export class User {
     lastName: string;
     avatar: string;
     admin: boolean;
-    status: string;
+    status: UserStatus;
+
+    SetStatus(status)
+    {
+        this.status = <UserStatus> status;
+    }
+}
+
+export enum UserStatus 
+{
+    OFFLINE,
+    ONLINE,
+    AFK
 }

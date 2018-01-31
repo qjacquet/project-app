@@ -37,7 +37,7 @@ export class ChatService implements Resolve<any>
     getChat(contactId)
     {
 
-        const chatItem = this.chats.filter(item => item.members.id == contactId)[0];
+        const chatItem = this.chats.filter(item => item.members.id === contactId)[0];
 
         console.log(chatItem);
 
@@ -50,7 +50,7 @@ export class ChatService implements Resolve<any>
         }
 
         this.onChatSelected.next(
-            this.chats.filter(item => item.members.id == contactId)[0]);
+            this.chats.filter(item => item.members.id === contactId)[0]);
 
 
         // const chatItem = this.chats.find((item) => {
@@ -99,7 +99,7 @@ export class ChatService implements Resolve<any>
     {
         return new Promise((resolve, reject) => {
 
-            const contact = this.contacts.filter(item => item._id == contactId)[0];
+            const contact = this.contacts.filter(item => item._id === contactId)[0];
 
             const chatId = Utils.generateGUID();
 
@@ -114,13 +114,15 @@ export class ChatService implements Resolve<any>
                     id: this.user.id,
                     firstName: this.user.firstName,
                     lastName: this.user.lastName,
-                    avatar: this.user.avatar
+                    avatar: this.user.avatar,
+                    _id: this.user.id
                 },
                 {
                     id: contact._id,
                     firstName: contact.firstName,
                     lastName: contact.lastName,
-                    avatar: contact.avatar
+                    avatar: contact.avatar,
+                    _id: contact._id
                 }
             );
 
@@ -220,7 +222,7 @@ export class ChatService implements Resolve<any>
             this.http.get(Utils.getApiUri('/users/'))
                 .subscribe((response: any) => {
                     resolve(<User[]>response
-                        .filter(item => item._id != this.authService
+                        .filter(item => item._id !== this.authService
                             .getCurrentUser().id));
                 }, reject);
         });

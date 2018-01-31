@@ -5,7 +5,7 @@ import { ConfigService } from '../../../../../core/services/config.service';
 import { Animations } from '../../../../../core/animations';
 
 import { AuthService } from '../../../../../core/services/auth.service';
-import { User } from '../../../../../core/models/user';
+import { User, UserStatus } from '../../../../../core/models/user';
 
 @Component({
     selector   : 'register',
@@ -88,6 +88,7 @@ export class RegisterComponent implements OnInit
         this.user = this.registerForm.value;
         this.user.avatar = "/assets/images/avatars/profile.jpg";
         this.user.admin = false;
+        this.user.status = UserStatus.OFFLINE;
     }
 
     signup() 
