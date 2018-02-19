@@ -11,9 +11,10 @@ import { Animations } from '../../../../core/animations';
 })
 export class FileManagerComponent implements OnInit
 {
-
     selected: any;
     pathArr: string[];
+
+    files: any;
 
     constructor(private fileManagerService: FileManagerService)
     {

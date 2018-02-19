@@ -15,6 +15,7 @@ export class ScrumboardBoardUserInviteComponent implements OnInit, OnDestroy
 {
     inviteForm: FormGroup;
     inviteFormErrors: any;
+    query: any;
 
     board: any;
     onBoardChanged: Subscription;

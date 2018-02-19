@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { SplashScreenService } from './core/services/splash-screen.service';
 import { TranslateService } from '@ngx-translate/core';
+import { SwUpdate, SwPush } from '@angular/service-worker';
 import { Utils } from './core/utils';
 
 @Component({
@@ -12,7 +13,8 @@ export class AppComponent
 {
     constructor(
         private SplashScreen: SplashScreenService,
-        private translate: TranslateService
+        private translate: TranslateService,
+        private swUpdate: SwUpdate
     )
     {
         // Add languages
@@ -25,4 +27,20 @@ export class AppComponent
         let browserLang = Utils.getLanguage();
         this.translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
     }
+
+    ngOnInit() {
+
+        if (this.swUpdate.isEnabled) {
+
+            this.swUpdate.available.subscribe(() => {
+
+                if (confirm("New version available. Load New Version?")) {
+
+                    window.location.reload();
+                }
+            });
+        }        
+    }
+
+
 }

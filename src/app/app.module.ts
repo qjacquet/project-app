@@ -23,6 +23,8 @@ import { AuthGuard, OnlyLoggedInUsersGuard } from './core/services/auth-guard.se
 import { AuthService } from './core/services/auth.service';
 import { UserService } from './core/services/user.service';
 import { JwtHelper } from 'angular2-jwt';
+import { ServiceWorkerModule } from '@angular/service-worker'
+import { environment } from '../environments/environment';
 
 const appRoutes: Routes = [
     {
@@ -35,11 +37,11 @@ const appRoutes: Routes = [
         loadChildren: './main/content/apps/chat/chat.module#ChatModule',
         canActivate: [OnlyLoggedInUsersGuard, AuthGuard]
     },
-    {
-        path: 'apps/file-manager',
-        loadChildren: './main/content/apps/file-manager/file-manager.module#FileManagerModule',
-        canActivate: [OnlyLoggedInUsersGuard, AuthGuard]
-    },
+    // {
+    //     path: 'apps/file-manager',
+    //     loadChildren: './main/content/apps/file-manager/file-manager.module#FileManagerModule',
+    //     canActivate: [OnlyLoggedInUsersGuard, AuthGuard]
+    // },
     {
         path: 'apps/dashboards/project',
         loadChildren: './main/content/apps/dashboards/project/project.module#ProjectModule',
@@ -83,10 +85,10 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         }),
 
         MainModule,
-
         PagesModule,
+        ProjectModule,
 
-        ProjectModule
+        environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : []
     ],
     providers: [
         /** HTTP Custom */
