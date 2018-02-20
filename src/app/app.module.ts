@@ -88,7 +88,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         PagesModule,
         ProjectModule,
 
-        environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : []
+        environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : ServiceWorkerModule.register('/ngsw-worker.dev.js')
     ],
     providers: [
         /** HTTP Custom */

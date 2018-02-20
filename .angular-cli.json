@@ -10,7 +10,8 @@
       "assets": [
         "assets",
         "app/main/content/components/angular-material",
-        "favicon.ico"
+        "favicon.ico",
+        { "glob": "ngsw-worker.dev.js", "input": "./", "output": "./" }
       ],
       "index": "index.html",
       "main": "main.ts",

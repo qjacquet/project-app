@@ -2,21 +2,21 @@ import { Component } from '@angular/core';
 import { SplashScreenService } from './core/services/splash-screen.service';
 import { TranslateService } from '@ngx-translate/core';
 import { SwUpdate, SwPush } from '@angular/service-worker';
+import { MatSnackBar } from '@angular/material';
 import { Utils } from './core/utils';
 
 @Component({
-    selector   : 'root',
+    selector: 'root',
     templateUrl: './app.component.html',
-    styleUrls  : ['./app.component.scss']
+    styleUrls: ['./app.component.scss']
 })
-export class AppComponent
-{
+export class AppComponent {
     constructor(
         private SplashScreen: SplashScreenService,
         private translate: TranslateService,
-        private swUpdate: SwUpdate
-    )
-    {
+        private swUpdate: SwUpdate,
+        private snackbar: MatSnackBar
+    ) {
         // Add languages
         this.translate.addLangs(['en', 'fr']);
 
@@ -34,12 +34,15 @@ export class AppComponent
 
             this.swUpdate.available.subscribe(() => {
 
-                if (confirm("New version available. Load New Version?")) {
+                const snack = this.snackbar.open('Update Available', 'Reload');
 
-                    window.location.reload();
-                }
+                snack
+                    .onAction()
+                    .subscribe(() => {
+                        window.location.reload();
+                    });
             });
-        }        
+        }
     }
 
 
