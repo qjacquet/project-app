@@ -11,7 +11,7 @@ export const environment = {
 
     auth0 : {
         clientID: '',
-        domain: 'auth0.com',
+        domain: '',
         audience: '',
     }
 };

@@ -14,4 +14,4 @@ App built with Material Design and Angular
 
 # configure
  
-in "environment/environment.ts", set the server URI.
+Rename environments/environment.dev.ts to "environment/environment.ts", and set the server URI + auth0.
