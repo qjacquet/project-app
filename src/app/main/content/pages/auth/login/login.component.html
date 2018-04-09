@@ -60,7 +60,7 @@
 
             <div fxLayout="column" fxLayoutAlign="start center">
 
-                <button mat-raised-button class="google">
+                <button mat-raised-button class="google" (click)="authService.signinAuth0()" >
                     Log in with Google
                 </button>
 

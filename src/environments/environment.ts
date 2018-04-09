@@ -7,5 +7,11 @@ export const environment = {
     production: false,
     hmr       : false,
 
-    server    : 'http://localhost:3000'
+    server    : 'http://localhost:3000',
+
+    auth0 : {
+        clientID: '__AUTH0_CLIENT_ID__',
+        domain: '__AUTH0_NAMESPACE__',
+        audience: 'https://__AUTH0_NAMESPACE__/userinfo',
+    }
 };

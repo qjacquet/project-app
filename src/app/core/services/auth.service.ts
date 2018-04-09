@@ -8,11 +8,23 @@ import { Utils } from '../utils';
 import { User, UserStatus } from '../models/user';
 import { JwtHelper } from 'angular2-jwt';
 import 'rxjs/add/operator/map';
+import { filter } from 'rxjs/operators';
+import * as auth0 from 'auth0-js';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class AuthService implements Resolve<any>
 {
     routeParams: any;
+
+    auth0 = new auth0.WebAuth({
+        clientID: environment.auth0.clientID,
+        domain: environment.auth0.domain,
+        responseType: 'token id_token',
+        audience: 'https://' + environment.auth0.domain + '/userinfo',
+        redirectUri: environment.server + '/callback',
+        scope: 'openid'
+      });
 
     constructor(
         private http: HttpClient,
@@ -46,6 +58,15 @@ export class AuthService implements Resolve<any>
      */
     signin(userForm): Observable<any> {
         return this.http.post(Utils.getApiUri('/auth'), userForm);
+    }
+
+    /**
+     * Call auth method with auth0
+     * @param userForm 
+     */
+    signinAuth0(): void {
+        console.log(this.auth0);
+        this.auth0.authorize();
     }
 
     /**
@@ -88,15 +109,15 @@ export class AuthService implements Resolve<any>
     }
 
     setToken(token) {
-        localStorage.setItem('token', token);
+        localStorage.setItem('access_token', token);
     }
 
     getToken() {
-        return localStorage.getItem('token');
+        return localStorage.getItem('access_token');
     }
 
     removeToken() {
-        localStorage.removeItem('token');
+        localStorage.removeItem('access_token');
     }
 
     getCurrentUser(): User {

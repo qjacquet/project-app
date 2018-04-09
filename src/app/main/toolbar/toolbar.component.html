@@ -27,16 +27,16 @@
 
         <div class="" fxFlex="0 1 auto" fxLayout="row" fxLayoutAlign="start center">
 
-            <button *ngIf="currentUser" mat-button [matMenuTriggerFor]="userMenu"
+            <!-- <button mat-button [matMenuTriggerFor]="userMenu"
                     class="user-button">
                 <div fxLayout="row" fxLayoutAlign="center center">
                     <img class="avatar" src="assets/images/avatars/profile.jpg">
                     <span class="username mr-12" fxHide fxShow.gt-sm>{{currentUser.firstName}} {{currentUser.lastName}}</span>
                     <mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
                 </div>
-            </button>
+            </button> -->
 
-            <mat-menu #userMenu="matMenu">
+            <!-- <mat-menu #userMenu="matMenu">
 
                 <button mat-menu-item (click)=profile()>
                     <mat-icon>account_circle</mat-icon>
@@ -54,7 +54,7 @@
                     <span>{{'TOOLBAR.USERMENU.LOGOUT' | translate}}</span>
                 </button>
 
-            </mat-menu>
+            </mat-menu> -->
 
             <div class="toolbar-separator"></div>
 
