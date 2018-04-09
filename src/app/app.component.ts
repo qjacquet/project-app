@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { SwUpdate, SwPush } from '@angular/service-worker';
 import { MatSnackBar } from '@angular/material';
 import { Utils } from './core/utils';
+import { AuthService } from './core/services/auth.service';
 
 @Component({
     selector: 'root',

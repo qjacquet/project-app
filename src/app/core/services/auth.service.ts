@@ -17,15 +17,6 @@ export class AuthService implements Resolve<any>
 {
     routeParams: any;
 
-    auth0 = new auth0.WebAuth({
-        clientID: environment.auth0.clientID,
-        domain: environment.auth0.domain,
-        responseType: 'token id_token',
-        audience: 'https://' + environment.auth0.domain + '/userinfo',
-        redirectUri: environment.server + '/callback',
-        scope: 'openid'
-      });
-
     constructor(
         private http: HttpClient,
         private router: Router
@@ -61,15 +52,6 @@ export class AuthService implements Resolve<any>
     }
 
     /**
-     * Call auth method with auth0
-     * @param userForm 
-     */
-    signinAuth0(): void {
-        console.log(this.auth0);
-        this.auth0.authorize();
-    }
-
-    /**
      * Call register method
      * @param userForm 
      */
@@ -99,6 +81,11 @@ export class AuthService implements Resolve<any>
         return false;
     }
 
+    isAuthenticated(): boolean {
+        const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
+        return new Date().getTime() < expiresAt;
+    }
+
     isAdmin() {
         var user = this.getCurrentUser();
 
@@ -109,7 +96,9 @@ export class AuthService implements Resolve<any>
     }
 
     setToken(token) {
-        localStorage.setItem('access_token', token);
+        localStorage.setItem('access_token', authResult.accessToken);
+        localStorage.setItem('id_token', authResult.idToken);
+        localStorage.setItem('expires_at', expiresAt);
     }
 
     getToken() {
@@ -118,6 +107,8 @@ export class AuthService implements Resolve<any>
 
     removeToken() {
         localStorage.removeItem('access_token');
+        localStorage.removeItem('id_token');
+        localStorage.removeItem('expires_at');
     }
 
     getCurrentUser(): User {
