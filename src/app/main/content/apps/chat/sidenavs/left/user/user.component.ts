@@ -26,7 +26,6 @@ export class ChatUserSidenavComponent implements OnInit, OnDestroy
     ngOnInit()
     {
         this.onFormChange = this.userForm.valueChanges
-                                .debounceTime(500)
                                 .distinctUntilChanged()
                                 .subscribe(data => {
                                     this.user.mood = data.mood;
