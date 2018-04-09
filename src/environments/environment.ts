@@ -10,8 +10,8 @@ export const environment = {
     server    : 'http://localhost:3000',
 
     auth0 : {
-        clientID: '__AUTH0_CLIENT_ID__',
-        domain: '__AUTH0_NAMESPACE__',
-        audience: 'https://__AUTH0_NAMESPACE__/userinfo',
+        clientID: '',
+        domain: 'auth0.com',
+        audience: '',
     }
 };
