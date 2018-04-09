@@ -28,7 +28,7 @@
             <form name="registerForm" [formGroup]="registerForm" novalidate>
 
                 <mat-form-field>
-                    <input matInput placeholder="First name" formControlName="firstName">
+                    <input matInput placeholder="First name" formControlName="firstName" autofocus>
                     <mat-error *ngIf="registerFormErrors.firstName.required">
                         First name is required
                     </mat-error>
@@ -54,6 +54,13 @@
                 <mat-form-field>
                     <input matInput placeholder="Password" type="password" formControlName="password">
                     <mat-error *ngIf="registerFormErrors.password.required">
+                        Password is required
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <input matInput placeholder="Confirm password" type="password" formControlName="passwordConfirm">
+                    <mat-error *ngIf="registerFormErrors.passwordConfirm.required">
                         Password is required
                     </mat-error>
                 </mat-form-field>

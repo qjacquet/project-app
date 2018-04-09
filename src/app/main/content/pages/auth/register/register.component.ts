@@ -6,6 +6,7 @@ import { Animations } from '../../../../../core/animations';
 
 import { AuthService } from '../../../../../core/services/auth.service';
 import { User, UserStatus } from '../../../../../core/models/user';
+import { AutofocusDirective } from '../../../../../core/directives/autofocus.directive'
 
 @Component({
     selector   : 'register',

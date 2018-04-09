@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfigService } from '../../../../../core/services/config.service';
 import { Animations } from '../../../../../core/animations';
 import { JwtHelper } from 'angular2-jwt';
+import { AutofocusDirective } from '../../../../../core/directives/autofocus.directive'
 
 @Component({
     selector   : 'login',
