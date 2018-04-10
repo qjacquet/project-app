@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { ConfigService } from '../core/services/config.service';
 import { Platform } from '@angular/cdk/platform';
 import { DOCUMENT } from '@angular/common';
+import { AutofocusDirective } from '../core/directives/autofocus/autofocus.directive';
 
 @Component({
     selector     : 'main',

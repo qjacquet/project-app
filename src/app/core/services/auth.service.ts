@@ -96,9 +96,7 @@ export class AuthService implements Resolve<any>
     }
 
     setToken(token) {
-        localStorage.setItem('access_token', authResult.accessToken);
-        localStorage.setItem('id_token', authResult.idToken);
-        localStorage.setItem('expires_at', expiresAt);
+        localStorage.setItem('access_token', token);
     }
 
     getToken() {
@@ -107,8 +105,6 @@ export class AuthService implements Resolve<any>
 
     removeToken() {
         localStorage.removeItem('access_token');
-        localStorage.removeItem('id_token');
-        localStorage.removeItem('expires_at');
     }
 
     getCurrentUser(): User {

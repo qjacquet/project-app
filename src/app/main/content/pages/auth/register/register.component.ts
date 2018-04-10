@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, AfterContentInit, ContentChild,AfterViewInit, ViewChild, ViewChildren } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfigService } from '../../../../../core/services/config.service';
 import { Animations } from '../../../../../core/animations';
+import { AutofocusDirective } from '../../../../../core/directives/autofocus/autofocus.directive';
 
 import { AuthService } from '../../../../../core/services/auth.service';
 import { User, UserStatus } from '../../../../../core/models/user';
-import { AutofocusDirective } from '../../../../../core/directives/autofocus.directive'
 
 @Component({
     selector   : 'register',
@@ -97,7 +97,7 @@ export class RegisterComponent implements OnInit
         this.setUser();
         this.authService.register(this.user)
             .subscribe(response => {
-                this.router.navigateByUrl('login');
+                this.router.navigateByUrl('login', {preserveQueryParams: true});
             });
     }
 }

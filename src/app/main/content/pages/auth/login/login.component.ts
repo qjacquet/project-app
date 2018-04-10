@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, AfterContentInit, ContentChild,AfterViewInit, ViewChild, ViewChildren } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../../../core/services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfigService } from '../../../../../core/services/config.service';
 import { Animations } from '../../../../../core/animations';
 import { JwtHelper } from 'angular2-jwt';
-import { AutofocusDirective } from '../../../../../core/directives/autofocus.directive'
+
+import { AutofocusDirective } from '../../../../../core/directives/autofocus/autofocus.directive';
 
 @Component({
     selector   : 'login',
@@ -89,7 +90,7 @@ export class LoginComponent implements OnInit
                     }
                     if (data.success == true) {
                         localStorage.setItem('access_token', data.token);
-                        this.router.navigateByUrl(this.redirectUrl);
+                        this.router.navigateByUrl(this.redirectUrl, {preserveQueryParams: true});
                     }
                 },
                 error => {
