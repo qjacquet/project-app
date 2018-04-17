@@ -88,6 +88,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         MainModule,
         PagesModule,
         ProjectModule,
+        AutofocusDirective,
 
         environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : ServiceWorkerModule.register('/ngsw-worker.dev.js')
     ],
