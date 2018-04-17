@@ -25,7 +25,6 @@ import { UserService } from './core/services/user.service';
 import { JwtHelper } from 'angular2-jwt';
 import { ServiceWorkerModule } from '@angular/service-worker'
 import { environment } from '../environments/environment';
-import { AutofocusDirective } from './core/directives/autofocus/autofocus.directive';
 
 const appRoutes: Routes = [
     {
@@ -88,7 +87,6 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         MainModule,
         PagesModule,
         ProjectModule,
-        AutofocusDirective,
 
         environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : ServiceWorkerModule.register('/ngsw-worker.dev.js')
     ],

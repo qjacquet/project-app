@@ -10,6 +10,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { MatSidenavHelperDirective, MatSidenavTogglerDirective } from '../directives/mat-sidenav-helper/mat-sidenav-helper.directive';
 import { MatSidenavHelperService } from '../directives/mat-sidenav-helper/mat-sidenav-helper.service';
+import { AutofocusDirective } from '../directives/autofocus/autofocus.directive';
 import { PipesModule } from '../pipes/pipes.module';
 import { ConfirmDialogComponent } from '../components/confirm-dialog/confirm-dialog.component';
 import { CountdownComponent } from '../components/countdown/countdown.component';
@@ -28,6 +29,7 @@ import { TranslateModule } from '@ngx-translate/core';
     declarations   : [
         MatSidenavHelperDirective,
         MatSidenavTogglerDirective,
+        AutofocusDirective,
         ConfirmDialogComponent,
         CountdownComponent,
         HljsComponent,

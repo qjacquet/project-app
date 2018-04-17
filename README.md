@@ -1,19 +1,19 @@
 [![Build Status](https://api.travis-ci.org/qjacquet/project-app.svg?branch=master)](https://travis-ci.org/qjacquet/project-app)
 
-### project-app
+# project-app
 
 App built with Material Design and Angular
 
-# prerequisites
+### prerequisites
 
 - npm
 - @angular-cli (latest)
 
-# install
+### install
 
 - npm install
 - ng serve 
 
-# configure
+### configure
  
-Configure "environments/environment.dev.ts"
+Configure "environments/environment.ts"
