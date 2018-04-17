@@ -7,11 +7,5 @@ export const environment = {
     production: false,
     hmr       : false,
 
-    server    : 'http://localhost:3000',
-
-    auth0 : {
-        clientID: '',
-        domain: '',
-        audience: '',
-    }
+    server    : 'http://localhost:3000'
 };

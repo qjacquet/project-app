@@ -1,26 +1,31 @@
 import { Injectable } from '@angular/core';
-import { Router, ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
+import { Router, ActivatedRouteSnapshot, ActivatedRoute, Resolve, RouterStateSnapshot } from '@angular/router';
 import { Location } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpRequest , HttpResponse } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Utils } from '../utils';
 import { User, UserStatus } from '../models/user';
 import { JwtHelper } from 'angular2-jwt';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
 import { filter } from 'rxjs/operators';
-import * as auth0 from 'auth0-js';
 import { environment } from '../../../environments/environment';
+import { error } from 'util';
 
 @Injectable()
 export class AuthService implements Resolve<any>
 {
     routeParams: any;
+    redirectUrl: any;
 
     constructor(
         private http: HttpClient,
-        private router: Router
-    ) {
+        private router: Router,
+        private route: ActivatedRoute,
+    ) 
+    {
+        this.redirectUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
 
     /**

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, AfterContentInit, ContentChild,AfterViewInit, ViewChild, ViewChildren } from '@angular/core';
+import { Component, OnInit, Input, Output, AfterContentInit, ContentChild, AfterViewInit, ViewChild, ViewChildren } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../../../core/services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -9,13 +9,12 @@ import { JwtHelper } from 'angular2-jwt';
 import { AutofocusDirective } from '../../../../../core/directives/autofocus/autofocus.directive';
 
 @Component({
-    selector   : 'login',
+    selector: 'login',
     templateUrl: './login.component.html',
-    styleUrls  : ['./login.component.scss'],
-    animations : Animations
+    styleUrls: ['./login.component.scss'],
+    animations: Animations
 })
-export class LoginComponent implements OnInit
-{
+export class LoginComponent implements OnInit {
     loginForm: FormGroup;
     loginFormErrors: any;
     redirectUrl: string;
@@ -27,29 +26,27 @@ export class LoginComponent implements OnInit
         private router: Router,
         private route: ActivatedRoute,
         private jwtHelper: JwtHelper
-    )
-    {
+    ) {
         this.Config.setSettings({
             layout: {
                 navigation: 'none',
-                toolbar   : 'none',
-                footer    : 'none'
+                toolbar: 'none',
+                footer: 'none'
             }
         });
 
         this.loginFormErrors = {
-            login   : {},
+            login: {},
             password: {},
-            global  : {}
+            global: {}
         };
 
         this.redirectUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
 
-    ngOnInit()
-    {
+    ngOnInit() {
         this.loginForm = this.formBuilder.group({
-            login   : ['', [Validators.required, Validators.email]],
+            login: ['', [Validators.required, Validators.email]],
             password: ['', Validators.required]
         });
 
@@ -58,12 +55,9 @@ export class LoginComponent implements OnInit
         });
     }
 
-    onLoginFormValuesChanged()
-    {
-        for ( const field in this.loginFormErrors )
-        {
-            if ( !this.loginFormErrors.hasOwnProperty(field) )
-            {
+    onLoginFormValuesChanged() {
+        for (const field in this.loginFormErrors) {
+            if (!this.loginFormErrors.hasOwnProperty(field)) {
                 continue;
             }
 
@@ -73,28 +67,27 @@ export class LoginComponent implements OnInit
             // Get the control
             const control = this.loginForm.get(field);
 
-            if ( control && control.dirty && !control.valid )
-            {
+            if (control && control.dirty && !control.valid) {
                 this.loginFormErrors[field] = control.errors;
             }
         }
     }
 
-    signin() 
-    {
+    signin() {
         this.authService.signin(this.loginForm.value)
             .subscribe(
-                data => {
-                    if (data.success == false) {
-                        this.loginFormErrors.global = data.message;
-                    }
-                    if (data.success == true) {
-                        localStorage.setItem('access_token', data.token);
-                        this.router.navigateByUrl(this.redirectUrl, {preserveQueryParams: true});
-                    }
-                },
-                error => {
-
-                });
+            data => {
+                console.log(data);
+                if (data.success == false) {
+                    this.loginFormErrors.global = data.message;
+                }
+                if (data.success == true) {
+                    localStorage.setItem('access_token', data.token);
+                    this.router.navigateByUrl(this.redirectUrl, { preserveQueryParams: true });
+                }
+            },
+            error => {
+                console.log(error);
+            });
     }
 }

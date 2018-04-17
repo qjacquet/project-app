@@ -96,8 +96,11 @@ export class RegisterComponent implements OnInit
     {   
         this.setUser();
         this.authService.register(this.user)
-            .subscribe(response => {
-                this.router.navigateByUrl('login', {preserveQueryParams: true});
-            });
+            .subscribe(
+                data => {
+                    this.router.navigateByUrl('login', {preserveQueryParams: true});
+                },
+                error => {}
+            );
     }
 }
